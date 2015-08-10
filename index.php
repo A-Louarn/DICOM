@@ -17,6 +17,32 @@
                 <label for="taille-patient">Taille :</label><input type="number" id="taille-patient" name="taille-patient" placeholder="taille"/><br />
                 <input type="button" value="suivant"/>
             </div>
+            <div id="reglagesExamen">
+                <label for="position-examen">Position de l'examen :</label>
+                    <input type="text" id="position-examen" list="liste-positions-examen" placeholder="Position"/>
+                    <datalist id="liste-positions-examen">
+                       <option>Debout</option>
+                       <option>Allong&eacute;</option>
+                    </datalist>
+                    <br />
+                <label for="activite-examen">&Eacute;tat du muscle / activit&eacute; demand&eacute;e :</label>
+                    <input type="text" id="activite-examen" list="liste-activites-examen" placeholder="Activit&eacute;"/>
+                    <datalist id="liste-activites-examen">
+                        <option>Repos</option>
+                        <option>Contraction</option>
+                        <option>Extension</option>
+                    </datalist>
+                    <br />
+                <label for="localisation-examen">Localisation de l'examen :</label>
+                    <input type="text" id="localisation-examen" list="liste-localisations-examen" placeholder="Localisation"/>
+                    <datalist id="liste-localisations-examen">
+                        <option>Bras</option>
+                        <option>Mollet</option>
+                        <option>Ventre</option>
+                    </datalist>
+                    <br />
+                <input type="button" value="suivant"/>
+            </div>
         </form>
     </body>
 </html>
