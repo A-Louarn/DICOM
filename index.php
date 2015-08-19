@@ -4,6 +4,8 @@
     </head>
     <body>
         <form>
+            <table cellspacing="10px"><tbody><tr>
+                <td><div style="width:400px; height:400px;">
             <div id="reglagesPatient">
                 <label for="id-patient">ID patient :</label><input type="text" id="id-patient" name="id-patient" placeholder="ID patient" /><br />
                 <label for="nom-patient">Nom du patient :</label><input type="text" id="nom-patient" name="nom-patient" placeholder="nom du patient" /><br />
@@ -16,7 +18,10 @@
                 <label for="poids-patient">Poids :</label><input type="number" id="poids-patient" name="poids-patient" placeholder="Poids"/><br />
                 <label for="taille-patient">Taille :</label><input type="number" id="taille-patient" name="taille-patient" placeholder="taille"/><br />
                 <input type="button" value="suivant"/>
+                <input type="button" value="charger patient"/>
             </div>
+                </div></td>
+                <td><div style="width:400px; height:400px;">
             <div id="reglagesExamen">
                 <label for="position-examen">Position de l'examen :</label>
                     <input type="text" id="position-examen" list="liste-positions-examen" placeholder="Position"/>
@@ -43,6 +48,39 @@
                     <br />
                 <input type="button" value="suivant"/>
             </div>
+                </div></td></tr>
+                <tr><td><div style="width:400px; height:400px;">
+            <div id="reglagesMedecins">
+                <label for="operateur">Op&eacute;rateur :</label>
+                    <input type="text" id="operateur" list="liste-operateur" placeholder="Op&eacute;rateur"/>
+                    <datalist id="liste-operateur">
+                        <option>Monsieur Stark</option>
+                        <option>Madame Potts</option>
+                    </datalist>
+                    <br />
+                <label for="prescripteur">Prescripteur :</label>
+                    <input type="text" id="prescripteur" list="liste-prescripteur" placeholder="Prescripteur"/>
+                    <datalist id="liste-prescripteur">
+                        <option>Monsieur Wayne</option>
+                        <option>Madame Kyle</option>
+                    </datalist>
+                <br />
+                <label for="realisateur">R&eacute;alisateur :</label>
+                    <input type="text" id="realisateur" list="liste-realisateur" placeholder="R&eacute;alisateur"/>
+                    <datalist id="liste-realisateur">
+                        <option>Monsieur Rogers</option>
+                        <option>Madame Carter</option>
+                    </datalist>
+                    <br />
+                <input type="button" value="suivant"/>
+            </div>
+                </div></td>
+                <td><div style="width:400px; height:400px;">
+            <div id="sauvegarder">
+                <input type="button" value="charger configuration"/>
+                <input type="button" value="sauvegarder"/>
+            </div>
+                </div></td></tr></tbody></table>
         </form>
     </body>
 </html>
