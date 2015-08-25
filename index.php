@@ -3,6 +3,7 @@
     <head>
         <title>DICOM - utilisateur</title>
         <link rel="stylesheet" href="./UI.css" />
+        <meta charset="utf-8" />
     </head>
     <body>
         <form>
