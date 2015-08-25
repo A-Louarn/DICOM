@@ -5,7 +5,7 @@
     <body>
         <form>
             <table cellspacing="10px"><tbody><tr>
-                <td><div style="width:400px; height:400px;">
+                <td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
             <div id="reglagesPatient">
                 <label for="id-patient">ID patient :</label><input type="text" id="id-patient" name="id-patient" placeholder="ID patient" /><br />
                 <label for="nom-patient">Nom du patient :</label><input type="text" id="nom-patient" name="nom-patient" placeholder="nom du patient" /><br />
@@ -21,7 +21,7 @@
                 <input type="button" value="charger patient"/>
             </div>
                 </div></td>
-                <td><div style="width:400px; height:400px;">
+                <td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
             <div id="reglagesExamen">
                 <label for="position-examen">Position de l'examen :</label>
                     <input type="text" id="position-examen" list="liste-positions-examen" placeholder="Position"/>
@@ -49,7 +49,7 @@
                 <input type="button" value="suivant"/>
             </div>
                 </div></td></tr>
-                <tr><td><div style="width:400px; height:400px;">
+                <tr><td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
             <div id="reglagesMedecins">
                 <label for="operateur">Op&eacute;rateur :</label>
                     <input type="text" id="operateur" list="liste-operateur" placeholder="Op&eacute;rateur"/>
@@ -75,7 +75,7 @@
                 <input type="button" value="suivant"/>
             </div>
                 </div></td>
-                <td><div style="width:400px; height:400px;">
+                <td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
             <div id="sauvegarder">
                 <input type="button" value="charger configuration"/>
                 <input type="button" value="sauvegarder"/>

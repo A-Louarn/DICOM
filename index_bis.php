@@ -5,7 +5,7 @@
     <body>
         <form>
                 <table cellspacing="10px"><tbody><tr>
-<td><div style="width:400px; height:400px; border: 2px solid #000000; padding: 3px; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px;">
+<td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
             <div id="reglagesGeneraux">
                 <label for="nom-site">Nom du site :</label><input type="text" id="nom-site" name="nom-site" placeholder="Nom du site" /><br />
                 <label for="adresse-site">Adresse du site :</label><input type="text" id="adresse-site" name="adresse-site" placeholder="Adresse du site" /><br />
@@ -56,7 +56,7 @@
                 <input type="button" value="suivant"/>
             </div>
                 </div></td>
-                <td><div style="width:400px; height:400px;">
+                <td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
             <div id="reglagesDicom">
                 <label for="adresse-ip">Adresse IP :</label><input type="text" id="adresse-ip" name="adresse-ip" placeholder="Adresse IP" /><br />
                 <label for="port-dicom">Port DICOM :</label><input type="text" id="port-dicom" name="port-dicom" placeholder="Port DICOM" /><br />
@@ -72,7 +72,7 @@
                 <input type="button" value="suivant"/>
             </div>
                 </div></td></tr>
-                <tr><td><div style="width:400px; height:400px;">
+                <tr><td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
             <div id="Logs">
                 <textarea rows="4" cols="50">
                     Ceci est un test pour les logs.
@@ -81,7 +81,7 @@
                 <input type="button" value="suivant"/>
             </div>
                 </div></td>
-                <td><div style="width:400px; height:400px;">
+                <td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
             <div id="sauvegarder">
                 <input type="button" value="charger configuration"/>
                 <input type="button" value="sauvegarder"/>
