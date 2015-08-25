@@ -1,10 +1,12 @@
 <?php
     $page_number = 3;
-    $current_building_page = -1;
+    $current_building_page = 0;
     if(!isset($_GET['page']) || !is_numeric($_GET['page']))
         $page = 0;
     else
         $page = $_GET['page']%$page_number;
+
+//TODO:charger patient en interrogeant la BDD + input datalist
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,8 +16,8 @@
         <meta charset="utf-8" />
     </head>
     <body>
-        <form>
-            <div id="reglagesPatient" class="<?php echo ($page == ++$current_building_page)? "":'disabled'?> reglagebox leftcolumn toprow">
+        <div id="reglagesPatient" class="<?php echo ($page == $current_building_page)? "":'disabled'?> reglagebox leftcolumn toprow">
+            <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
                 <label for="id-patient">ID patient :</label>
                     <input type="text" id="id-patient" name="id-patient" placeholder="ID patient" <?php echo ($page == $current_building_page)? "":'disabled'?> />
                 <br />
@@ -44,10 +46,12 @@
                 <label for="taille-patient">Taille :</label>
                     <input type="number" id="taille-patient" name="taille-patient" placeholder="taille" <?php echo ($page == $current_building_page)? "":'disabled'?> />
                 <br />
-                <input type="button" value="suivant" <?php echo ($page == $current_building_page)? "":'disabled'?> />
-                <input type="button" value="charger patient" <?php echo ($page == $current_building_page)? "":'disabled'?> />
-            </div>
-            <div id="reglagesExamen" class="<?php echo ($page == ++$current_building_page)? "":'disabled'?> reglagebox rightcolumn toprow">
+                <input type="submit" value="suivant" <?php echo ($page == $current_building_page)? "":'disabled'?> />
+            </form>
+        </div>
+        <?php ++$current_building_page; ?>
+        <div id="reglagesExamen" class="<?php echo ($page == $current_building_page)? "":'disabled'?> reglagebox rightcolumn toprow">
+            <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
                 <label for="position-examen">Position de l'examen :</label>
                     <input type="text" id="position-examen" list="liste-positions-examen" placeholder="Position" <?php echo ($page == $current_building_page)? "":'disabled'?> />
                     <datalist id="liste-positions-examen">
@@ -71,9 +75,12 @@
                         <option>Ventre</option>
                     </datalist>
                     <br />
-                <input type="button" value="suivant" <?php echo ($page == $current_building_page)? "":'disabled'?> />
-            </div>
-            <div id="reglagesMedecins" class="<?php echo ($page == ++$current_building_page)? "":'disabled'?> reglagebox leftcolumn bottomrow">
+                <input type="submit" value="suivant" <?php echo ($page == $current_building_page)? "":'disabled'?> />
+            </form>
+        </div>
+        <?php ++$current_building_page; ?>
+        <div id="reglagesMedecins" class="<?php echo ($page == $current_building_page)? "":'disabled'?> reglagebox leftcolumn bottomrow">
+            <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
                 <label for="operateur">Op&eacute;rateur :</label>
                     <input type="text" id="operateur" list="liste-operateur" placeholder="Op&eacute;rateur" <?php echo ($page == $current_building_page)? "":'disabled'?> />
                     <datalist id="liste-operateur">
@@ -95,12 +102,12 @@
                         <option>Madame Carter</option>
                     </datalist>
                     <br />
-                <input type="button" value="suivant" <?php echo ($page == $current_building_page)? "":'disabled'?> />
-            </div>
-            <div id="sauvegarder" class="reglagebox rightcolumn bottomrow">
-                <input type="button" value="charger configuration"/>
-                <input type="button" value="sauvegarder"/>
-            </div>
-        </form>
+                <input type="submit" value="suivant" <?php echo ($page == $current_building_page)? "":'disabled'?> />
+            </form>
+        </div>
+        <div id="sauvegarder" class="reglagebox rightcolumn bottomrow">
+            <input type="button" value="charger configuration"/>
+            <input type="button" value="sauvegarder"/>
+        </div>
     </body>
 </html>
