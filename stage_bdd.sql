@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `Signal` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Patient_has_Examen` (
     `patient_id` INTEGER NOT NULL,
-    FOREIGN KEY(patient_id) REFERENCES Patient(patient_id),
     `examen_accessionNumber` INTEGER NOT NULL,
+    FOREIGN KEY(patient_id) REFERENCES Patient(patient_id),
     FOREIGN KEY(examen_accessionNumber) REFERENCES Examen(examen_accessionNumber)
 );
