@@ -40,50 +40,35 @@ CREATE TABLE IF NOT EXISTS `Examen` (
 
 
 -- -----------------------------------------------------
--- Table `Opérateur` TODO
+-- Table `Opérateur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Operateur` (
-  `OperatorIDSequence` VARCHAR(2) PRIMARY KEY,
-  `OperatorName` VARCHAR(255) NOT NULL,
-  `Examen_AccessionNumber` INTEGER NOT NULL,
-  INDEX `fk_Opérateur_Examen1_idx` (`Examen_AccessionNumber` ASC) ,
-  CONSTRAINTEGER `fk_Opérateur_Examen1`
-    FOREIGN KEY (`Examen_AccessionNumber`)
-    REFERENCES `Examen` (`AccessionNumber`)
+  `operateur_idSequence` VARCHAR(2) PRIMARY KEY,
+  `operateur_name` VARCHAR(255) NOT NULL,
+  `examen_accessionNumber` INTEGER NOT NULL,
+    FOREIGN KEY(examen_accessionNumber) REFERENCES Examen(examen_accessionNumber)
 );
 
 
 -- -----------------------------------------------------
--- Table `Realisateur` TODO
+-- Table `Realisateur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Realisateur` (
-  `PerformingPhysicianIDSequence` VARCHAR(2) NOT NULL,
-  `PerformingPhysicianName` VARCHAR(255) NOT NULL,
-  `Examen_AccessionNumber` INTEGER NOT NULL,
-  PRIMARY KEY (`PerformingPhysicianIDSequence`) ,
-  INDEX `fk_Realisateur_Examen1_idx` (`Examen_AccessionNumber` ASC) ,
-  CONSTRAINTEGER `fk_Realisateur_Examen1`
-    FOREIGN KEY (`Examen_AccessionNumber`)
-    REFERENCES `Examen` (`AccessionNumber`)
-
-
+  `realisateur_performingPhysicianIDSequence` VARCHAR(2) PRIMARY KEY,
+  `realisateur_performingPhysicianName` VARCHAR(255) NOT NULL,
+  `examen_accessionNumber` INTEGER NOT NULL,
+    FOREIGN KEY(examen_accessionNumber) REFERENCES Examen(examen_accessionNumber)
 );
 
 
 -- -----------------------------------------------------
--- Table `Prescripteur` TODO
+-- Table `Prescripteur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Prescripteur` (
-  `ReferringPhysicianIDSequence` VARCHAR(2) NOT NULL,
-  `ReferringPhysicianName` VARCHAR(255) NOT NULL,
-  `Examen_AccessionNumber` INTEGER NOT NULL,
-  PRIMARY KEY (`ReferringPhysicianIDSequence`) ,
-  INDEX `fk_Prescripteur_Examen1_idx` (`Examen_AccessionNumber` ASC) ,
-  CONSTRAINTEGER `fk_Prescripteur_Examen1`
-    FOREIGN KEY (`Examen_AccessionNumber`)
-    REFERENCES `Examen` (`AccessionNumber`)
-
-
+  `prescripteur_referringPhysicianIDSequence` VARCHAR(2) PRIMARY KEY,
+  `prescripteur_referringPhysicianName` VARCHAR(255) NOT NULL,
+  `examen_accessionNumber` INTEGER NOT NULL,
+    FOREIGN KEY(examen_accessionNumber) REFERENCES Examen(examen_accessionNumber)
 );
 
 
@@ -100,9 +85,9 @@ CREATE TABLE IF NOT EXISTS `Site` (
 -- Table `DICOM`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DICOM` (
-  `IP` VARCHAR(255) PRIMARY KEY,
-  `Port` VARCHAR(255) NOT NULL,
-  `TransfertSyntaxeUID` VARCHAR(255) NOT NULL
+  `dicom_IP` VARCHAR(255) PRIMARY KEY,
+  `dicom_port` VARCHAR(255) NOT NULL,
+  `dicom_transfertSyntaxeUID` VARCHAR(255) NOT NULL
 );
 
 
@@ -124,23 +109,17 @@ CREATE TABLE IF NOT EXISTS `Produit` (
 
 
 -- -----------------------------------------------------
--- Table `Console` TODO
+-- Table `Console`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Console` (
-  `SourceApplicationEntityTitle` VARCHAR(255) NOT NULL,
-  `StationName` VARCHAR(255) NOT NULL,
-  `DeviceSerialNumber` VARCHAR(255) NOT NULL,
-  `PerformedStationAETitle` VARCHAR(255) NOT NULL,
-  `PerformedStationName` VARCHAR(255) NOT NULL,
-  `DICOM_IP` VARCHAR(255) NOT NULL,
-  `Consolecol` VARCHAR(45) NULL,
-  PRIMARY KEY (`SourceApplicationEntityTitle`, `DICOM_IP`) ,
-  INDEX `fk_Console_DICOM1_idx` (`DICOM_IP` ASC) ,
-  CONSTRAINTEGER `fk_Console_DICOM1`
-    FOREIGN KEY (`DICOM_IP`)
-    REFERENCES `DICOM` (`IP`)
-
-
+  `console_SourceApplicationEntityTitle` VARCHAR(255) PRIMARY KEY,
+  `console_StationName` VARCHAR(255) NOT NULL,
+  `console_DeviceSerialNumber` VARCHAR(255) NOT NULL,
+  `console_PerformedStationAETitle` VARCHAR(255) NOT NULL,
+  `console_PerformedStationName` VARCHAR(255) NOT NULL,
+  `console_col` VARCHAR(45) NULL,
+  `dicom_IP` VARCHAR(255) NOT NULL,
+    FOREIGN KEY(dicom_IP) REFERENCES Dicom(dicom_IP)
 );
 
 
@@ -156,76 +135,62 @@ CREATE TABLE IF NOT EXISTS `Study` (
 
 
 -- -----------------------------------------------------
--- Table `Serie` TODO
+-- Table `Serie`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Serie` (
-  `SeriesDescription` INTEGER NOT NULL,
-  `SeriesNumber` INTEGER NOT NULL,
-  `InstanceNumber` INTEGER NOT NULL,
-  `ImagesInAcquisition` INTEGER NOT NULL,
-  `SerieDate` DATE NOT NULL,
-  `SerieTime` DATETIME NOT NULL,
-  `AcquisitionDate` DATE NOT NULL,
-  `AcquisitionTime` DATETIME NOT NULL,
-  `SerieInstanceUID` VARCHAR(255) NOT NULL,
-  `FrameOfReferenceUID` VARCHAR(255) NOT NULL,
-  `MediaStorageSOPClassUID` VARCHAR(255) NOT NULL,
-  `SOPClassUID` VARCHAR(255) NOT NULL,
-  `ReferencedSOPClassUID` VARCHAR(255) NOT NULL,
-  `Study_StudyID` INTEGER NOT NULL,
-  PRIMARY KEY (`SeriesDescription`, `Study_StudyID`) ,
-  INDEX `fk_Serie_Study1_idx` (`Study_StudyID` ASC) ,
-  CONSTRAINTEGER `fk_Serie_Study1`
-    FOREIGN KEY (`Study_StudyID`)
-    REFERENCES `Study` (`StudyID`)
-
-
+  `serie_description` INTEGER PRIMARY KEY,
+  `serie_number` INTEGER NOT NULL,
+  `serie_instanceNumber` INTEGER NOT NULL,
+  `serie_imagesInAcquisition` INTEGER NOT NULL,
+  `serie_serieDatetime` DATETIME NOT NULL,
+  `serie_acquisitionDatetime` DATETIME NOT NULL,
+  `serie_instanceUID` VARCHAR(255) NOT NULL,
+  `serie_frameOfReferenceUID` VARCHAR(255) NOT NULL,
+  `serie_mediaStorageSOPClassUID` VARCHAR(255) NOT NULL,
+  `serie_SOPClassUID` VARCHAR(255) NOT NULL,
+  `serie_referencedSOPClassUID` VARCHAR(255) NOT NULL,
+  `study_id` INTEGER NOT NULL,
+    FOREIGN KEY(study_id) REFERENCES Study(study_id)
 );
 
 
 -- -----------------------------------------------------
--- Table `Image` TODO
+-- Table `Image`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Image` (
-  `Reference` INTEGER NOT NULL,
-  `SampelPerPixel` INTEGER NOT NULL,
-  `SampelPerPixelUsed` INTEGER NOT NULL,
-  `PhotometricInterpretation` VARCHAR(255) NOT NULL,
-  `Rows` INTEGER NOT NULL,
-  `Columns` INTEGER NOT NULL,
-  `BitAllocated` INTEGER NOT NULL,
-  `BitStoraged` INTEGER NOT NULL,
-  `PixelRepresentation` INTEGER NOT NULL,
-  `WindowCenter` INTEGER NOT NULL,
-  `WindowWith` INTEGER NOT NULL,
-  `WaveformDisplayBkgCIELabValue` VARCHAR(255) NOT NULL,
-  `ChannelRecommendDisplayCIELabValue` VARCHAR(255) NOT NULL,
-  `NumericValue` INTEGER NOT NULL,
-  `ImageFrameOrigin` INTEGER NOT NULL,
-  `AnnotationSequence` VARCHAR(255) NULL,
-  `UnformattedTextValue` VARCHAR(255) NULL,
-  `GraphicLayerDescription` VARCHAR(255) NULL,
-  `OverlayRows` INTEGER NOT NULL,
-  `OverlayColumns` INTEGER NOT NULL,
-  `OverlayDescription` VARCHAR(255) NOT NULL,
-  `OverlayType` VARCHAR(1) NOT NULL,
-  `OverlayOrigin` VARCHAR(3) NOT NULL,
-  `OverlayBitsAllocated` INTEGER NOT NULL,
-  `OverlayBitPosition` INTEGER NOT NULL,
-  `OverlayData` INTEGER NOT NULL,
-  `PixelData` INTEGER NOT NULL,
-  `ReferencedImageSequence` VARCHAR(255) NOT NULL,
-  `MediaStorageSOPInstanceUID` VARCHAR(255) NOT NULL,
-  `SOPInstanceUID` VARCHAR(255) NOT NULL,
-  `ReferencedSOPInstanceUID` VARCHAR(255) NOT NULL,
-  `Serie_SeriesDescription` INTEGER NOT NULL,
-  PRIMARY KEY (`Reference`, `Serie_SeriesDescription`) ,
-  INDEX `fk_Image_Serie_idx` (`Serie_SeriesDescription` ASC) ,
-  CONSTRAINTEGER `fk_Image_Serie`
-    FOREIGN KEY (`Serie_SeriesDescription`)
-    REFERENCES `Serie` (`SeriesDescription`)
-
-
+  `image_reference` INTEGER PRIMARY KEY,
+  `image_sampelPerPixel` INTEGER NOT NULL,
+  `image_sampelPerPixelUsed` INTEGER NOT NULL,
+  `image_photometricInterpretation` VARCHAR(255) NOT NULL,
+  `image_rows` INTEGER NOT NULL,
+  `image_columns` INTEGER NOT NULL,
+  `image_bitAllocated` INTEGER NOT NULL,
+  `image_bitStoraged` INTEGER NOT NULL,
+  `image_pixelRepresentation` INTEGER NOT NULL,
+  `image_windowCenter` INTEGER NOT NULL,
+  `image_windowWith` INTEGER NOT NULL,
+  `image_waveformDisplayBkgCIELabValue` VARCHAR(255) NOT NULL,
+  `image_channelRecommendDisplayCIELabValue` VARCHAR(255) NOT NULL,
+  `image_numericValue` INTEGER NOT NULL,
+  `image_imageFrameOrigin` INTEGER NOT NULL,
+  `image_annotationSequence` VARCHAR(255) NULL,
+  `image_unformattedTextValue` VARCHAR(255) NULL,
+  `image_graphicLayerDescription` VARCHAR(255) NULL,
+  `image_overlayRows` INTEGER NOT NULL,
+  `image_overlayColumns` INTEGER NOT NULL,
+  `image_overlayDescription` VARCHAR(255) NOT NULL,
+  `image_overlayType` VARCHAR(1) NOT NULL,
+  `image_overlayOrigin` VARCHAR(3) NOT NULL,
+  `image_overlayBitsAllocated` INTEGER NOT NULL,
+  `image_overlayBitPosition` INTEGER NOT NULL,
+  `image_overlayData` INTEGER NOT NULL,
+  `image_pixelData` INTEGER NOT NULL,
+  `image_referencedImageSequence` VARCHAR(255) NOT NULL,
+  `image_mediaStorageSOPInstanceUID` VARCHAR(255) NOT NULL,
+  `image_SOPInstanceUID` VARCHAR(255) NOT NULL,
+  `image_referencedSOPInstanceUID` VARCHAR(255) NOT NULL,
+  `serie_description` INTEGER NOT NULL,
+    FOREIGN KEY(serie_description) REFERENCES Serie(serie_description)
 );
 
 
@@ -253,18 +218,11 @@ CREATE TABLE IF NOT EXISTS `Signal` (
 
 
 -- -----------------------------------------------------
--- Table `Patient_has_Examen` TODO
+-- Table `Patient_has_Examen`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Patient_has_Examen` (
-  `Patient_PatientID` INTEGER NOT NULL,
-  `Examen_AccessionNumber` INTEGER NOT NULL,
-  PRIMARY KEY (`Patient_PatientID`, `Examen_AccessionNumber`) ,
-  INDEX `fk_Patient_has_Examen_Examen1_idx` (`Examen_AccessionNumber` ASC) ,
-  INDEX `fk_Patient_has_Examen_Patient1_idx` (`Patient_PatientID` ASC) ,
-  CONSTRAINTEGER `fk_Patient_has_Examen_Patient1`
-    FOREIGN KEY (`Patient_PatientID`)
-    REFERENCES `Patient` (`PatientID`),
-  CONSTRAINTEGER `fk_Patient_has_Examen_Examen1`
-    FOREIGN KEY (`Examen_AccessionNumber`)
-    REFERENCES `Examen` (`AccessionNumber`)
+  `patient_id` INTEGER NOT NULL,
+    FOREIGN KEY(patient_id) REFERENCES Patient(patient_id),
+  `examen_accessionNumber` INTEGER NOT NULL,
+    FOREIGN KEY(examen_accessionNumber) REFERENCES Examen(examen_accessionNumber)
 );
