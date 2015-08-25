@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>DICOM - admin</title>
+        <link rel="stylesheet" href="./UI.css" />
     </head>
     <body>
         <form>
-                <table cellspacing="10px"><tbody><tr>
-<td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
-            <div id="reglagesGeneraux">
+            <div id="reglagesGeneraux" class="reglagebox leftcolumn toprow">
                 <label for="nom-site">Nom du site :</label><input type="text" id="nom-site" name="nom-site" placeholder="Nom du site" /><br />
                 <label for="adresse-site">Adresse du site :</label><input type="text" id="adresse-site" name="adresse-site" placeholder="Adresse du site" /><br />
                 <label for="operateur">Op&eacute;rateur :</label>
@@ -55,9 +55,7 @@
                     <br />
                 <input type="button" value="suivant"/>
             </div>
-                </div></td>
-                <td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
-            <div id="reglagesDicom">
+            <div id="reglagesDicom" class="reglagebox rightcolumn toprow">
                 <label for="adresse-ip">Adresse IP :</label><input type="text" id="adresse-ip" name="adresse-ip" placeholder="Adresse IP" /><br />
                 <label for="port-dicom">Port DICOM :</label><input type="text" id="port-dicom" name="port-dicom" placeholder="Port DICOM" /><br />
                 <label for="syntaxe-transfert">Syntaxe de tranfert :</label>
@@ -71,22 +69,17 @@
                     <br />
                 <input type="button" value="suivant"/>
             </div>
-                </div></td></tr>
-                <tr><td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
-            <div id="Logs">
+            <div id="Logs" class="reglagebox leftcolumn bottomrow">
                 <textarea rows="4" cols="50">
                     Ceci est un test pour les logs.
                 </textarea>
                 <br />
                 <input type="button" value="suivant"/>
             </div>
-                </div></td>
-                <td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
-            <div id="sauvegarder">
+            <div id="sauvegarder" class="reglagebox rightcolumn bottomrow">
                 <input type="button" value="charger configuration"/>
                 <input type="button" value="sauvegarder"/>
             </div>
-                </div></td></tr></tbody></table>
         </form>
     </body>
 </html>

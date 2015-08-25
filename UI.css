@@ -1,0 +1,33 @@
+.reglagebox
+{
+    width:400px;
+    height:400px;
+
+    position: absolute;
+
+    border-radius: 20px;
+
+    box-shadow: 1px 0px 5px gray;
+
+    padding: 10px;
+}
+
+.leftcolumn
+{
+    left: 10px;
+}
+
+.rightcolumn
+{
+    left: 450px;
+}
+
+.toprow
+{
+    top: 10px;
+}
+
+.bottomrow
+{
+    top: 450px;
+}

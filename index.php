@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>DICOM - utilisateur</title>
+        <link rel="stylesheet" href="./UI.css" />
     </head>
     <body>
         <form>
-            <table cellspacing="10px"><tbody><tr>
-                <td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
-            <div id="reglagesPatient">
+            <div id="reglagesPatient" class="reglagebox leftcolumn toprow">
                 <label for="id-patient">ID patient :</label><input type="text" id="id-patient" name="id-patient" placeholder="ID patient" /><br />
                 <label for="nom-patient">Nom du patient :</label><input type="text" id="nom-patient" name="nom-patient" placeholder="nom du patient" /><br />
                 <label for="prenom-patient">Pr&eacute;nom du patient :</label><input type="text" id="prenom-patient" name="prenom-patient" placeholder="pr&eacute;nom du patient" /><br />
@@ -20,9 +20,7 @@
                 <input type="button" value="suivant"/>
                 <input type="button" value="charger patient"/>
             </div>
-                </div></td>
-                <td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
-            <div id="reglagesExamen">
+            <div id="reglagesExamen" class="reglagebox rightcolumn toprow">
                 <label for="position-examen">Position de l'examen :</label>
                     <input type="text" id="position-examen" list="liste-positions-examen" placeholder="Position"/>
                     <datalist id="liste-positions-examen">
@@ -48,9 +46,7 @@
                     <br />
                 <input type="button" value="suivant"/>
             </div>
-                </div></td></tr>
-                <tr><td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
-            <div id="reglagesMedecins">
+            <div id="reglagesMedecins" class="reglagebox leftcolumn bottomrow">
                 <label for="operateur">Op&eacute;rateur :</label>
                     <input type="text" id="operateur" list="liste-operateur" placeholder="Op&eacute;rateur"/>
                     <datalist id="liste-operateur">
@@ -74,13 +70,10 @@
                     <br />
                 <input type="button" value="suivant"/>
             </div>
-                </div></td>
-                <td><div style="width:400px; height:400px;border-radius:20px 20px 20px 20px; -moz-border-radius: 50px;box-shadow:1px 0px 5px gray;-moz-box-shadow:Gray 1px 0px 5px;padding-left:10px; padding-top:10px">
-            <div id="sauvegarder">
+            <div id="sauvegarder" class="reglagebox rightcolumn bottomrow">
                 <input type="button" value="charger configuration"/>
                 <input type="button" value="sauvegarder"/>
             </div>
-                </div></td></tr></tbody></table>
         </form>
     </body>
 </html>
