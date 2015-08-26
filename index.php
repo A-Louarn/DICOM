@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $page_number = 3;
     $current_building_page = 0;
     if(!isset($_GET['page']) || !is_numeric($_GET['page']))
@@ -12,6 +13,7 @@
         <title>DICOM - utilisateur</title>
         <link rel="stylesheet" href="./UI.css" />
         <meta charset="utf-8" />
+<!--        <?php print_r($_SESSION); ?>-->
     </head>
     <body>
         <div id="reglagesPatient" class="<?php echo ($page == $current_building_page)? "":"disabled"; ?> reglagebox leftcolumn toprow">
@@ -25,18 +27,10 @@
                 <input type="button" id="boutonChargerPatient" value="Charger patient" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
             </div>
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
-                <label for="id-patient">ID patient :</label>
-                    <input type="text" id="id-patient" name="id-patient" placeholder="ID patient" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
-                <br />
-                <label for="nom-patient">Nom du patient :</label>
-                    <input type="text" id="nom-patient" name="nom-patient" placeholder="nom du patient" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
-                <br />
-                <label for="prenom-patient">Pr&eacute;nom du patient :</label>
-                    <input type="text" id="prenom-patient" name="prenom-patient" placeholder="pr&eacute;nom du patient" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
-                <br />
-                <label for="insee-patient">Num&eacute;ro INSEE :</label>
-                    <input type="text" id="insee-patient" name="insee-patient" placeholder="Num&eacute;ro INSEE" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
-                <br />
+                <?php printInput("text", "id-patient", "ID patient");?>
+                <?php printInput("text", "nom-patient", "Nom du patient");?>
+                <?php printInput("text", "prenom-patient", "Prénom du patient");?>
+                <?php printInput("text", "insee-patient", "Numéro INSEE");?>
                 <label>Sexe :</label>   <input type="radio" name="sexe-patient" id="sexe-patient-F" value="F" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
                                             <label for="sexe-patient-F">Femme</label>
                                         <input type="radio" name="sexe-patient" id="sexe-patient-H" value="H" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
@@ -44,15 +38,9 @@
                                         <input type="radio" name="sexe-patient" id="sexe-patient-A" value="A" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
                                             <label for="sexe-patient-A">Autre</label>
                 <br />
-                <label for="age-patient">&acirc;ge :</label>
-                    <input type="number" id="age-patient" name="age-patient" placeholder="&acirc;ge" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
-                <br />
-                <label for="poids-patient">Poids :</label>
-                    <input type="number" id="poids-patient" name="poids-patient" placeholder="Poids" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
-                <br />
-                <label for="taille-patient">Taille :</label>
-                    <input type="number" id="taille-patient" name="taille-patient" placeholder="taille" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
-                <br />
+                <?php printInput("number", "age-patient", "Âge"); ?>
+                <?php printInput("number", "poids-patient", "Poids"); ?>
+                <?php printInput("number", "taille-patient", "Taille"); ?>
                 <input type="submit" value="suivant" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
             </form>
         </div>
@@ -112,3 +100,20 @@
         </div>
     </body>
 </html>
+<?php
+function printInput($type,$id,$label)
+{
+    $label = htmlentities($label);
+
+    echo '<label for="'.$id.'">'.$label.' :</label>'."\n";
+
+    echo '                    <input type="'.$type.'" id="'.$id.'" name="'.$id.'" placeholder="'.strtolower($label).'" ';
+    if(isset($_SESSION[$id]))
+        echo 'value="'.$_SESSION[$id].'" ';
+    if($GLOBALS['page'] != $GLOBALS['current_building_page'])
+        echo "disabled";
+    echo '/>'."\n";
+
+    echo '                <br />'."\n";
+}
+?>
