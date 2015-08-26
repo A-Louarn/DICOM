@@ -31,13 +31,7 @@
                 <?php printInput("text", "nom-patient", "Nom du patient");?>
                 <?php printInput("text", "prenom-patient", "Prénom du patient");?>
                 <?php printInput("text", "insee-patient", "Numéro INSEE");?>
-                <label>Sexe :</label>   <input type="radio" name="sexe-patient" id="sexe-patient-F" value="F" <?php disable() ?> />
-                                            <label for="sexe-patient-F">Femme</label>
-                                        <input type="radio" name="sexe-patient" id="sexe-patient-H" value="H" <?php disable() ?> />
-                                            <label for="sexe-patient-H">Homme</label>
-                                        <input type="radio" name="sexe-patient" id="sexe-patient-A" value="A" <?php disable() ?> />
-                                            <label for="sexe-patient-A">Autre</label>
-                <br />
+                <?php printRadioButton("sexe-patient", "Sexe", array("F"=>"Femme","H"=>"Homme","A"=>"Autre")); ?>
                 <?php printInput("number", "age-patient", "Âge"); ?>
                 <?php printInput("number", "poids-patient", "Poids"); ?>
                 <?php printInput("number", "taille-patient", "Taille"); ?>
@@ -124,5 +118,24 @@ function printInput($type,$id,$label)
     echo '/>'."\n";
 
     echo '                <br />'."\n";
+}
+
+function printRadioButton($id,$label,$buttons)
+{
+    $label = htmlentities($label);
+
+    echo '<label>'.$label.' :</label>'."\n";
+
+    foreach($buttons as $value => $buttonLabel)
+    {
+        $buttonLabel = htmlentities($buttonLabel);
+        echo '<input type="radio" name="'.$id.'" id="'.$id.'-'.$value.'" value="'.$value.'" ';
+        if($_SESSION[$id] == $value)
+            echo "checked ";
+        disable();
+        echo ' />'."\n";
+        echo '<label for="'.$id.'-'.$value.'">'.$buttonLabel.'</label>'."\n";
+    }
+    echo '<br />';
 }
 ?>
