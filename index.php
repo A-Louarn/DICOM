@@ -49,12 +49,14 @@
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
                 <label for="position-examen">Position de l'examen :</label>
                     <select id="position-examen" name="position-examen" <?php disable() ?>>
+                        <?php /*TODO: load from DB*/ ?>
                        <option value="0">Debout</option>
                        <option value="1">Allong&eacute;</option>
                     </select>
                     <br />
                 <label for="activite-examen">&Eacute;tat du muscle / activit&eacute; demand&eacute;e :</label>
                     <select id="activite-examen" name="activites-examen" <?php disable() ?>>
+                        <?php /*TODO: load from DB*/ ?>
                         <option value="0">Repos</option>
                         <option value="1">Contraction</option>
                         <option value="2">Extension</option>
@@ -62,6 +64,7 @@
                     <br />
                 <label for="localisation-examen">Localisation de l'examen :</label>
                     <select id="localisation-examen" name="localisation-examen" <?php disable() ?>>
+                        <?php /*TODO: load from DB*/ ?>
                         <option value="0">Bras</option>
                         <option value="1">Mollet</option>
                         <option value="2">Ventre</option>
