@@ -60,26 +60,24 @@
         <div id="reglagesExamen" class="<?php echo ($page == $current_building_page)? "":"disabled"; ?> reglagebox rightcolumn toprow">
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
                 <label for="position-examen">Position de l'examen :</label>
-                    <select id="liste-positions-examen" <?php echo ($page == $current_building_page)? "":"disabled"; ?>>
+                    <select id="position-examen" name="position-examen" <?php echo ($page == $current_building_page)? "":"disabled"; ?>>
                        <option value="0">Debout</option>
                        <option value="1">Allong&eacute;</option>
                     </select>
                     <br />
                 <label for="activite-examen">&Eacute;tat du muscle / activit&eacute; demand&eacute;e :</label>
-                    <input type="text" id="activite-examen" list="liste-activites-examen" placeholder="Activit&eacute;" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
-                    <datalist id="liste-activites-examen">
-                        <option>Repos</option>
-                        <option>Contraction</option>
-                        <option>Extension</option>
-                    </datalist>
+                    <select id="activite-examen" name="activites-examen" <?php echo ($page == $current_building_page)? "":"disabled"; ?>>
+                        <option value="0">Repos</option>
+                        <option value="1">Contraction</option>
+                        <option value="2">Extension</option>
+                    </select>
                     <br />
                 <label for="localisation-examen">Localisation de l'examen :</label>
-                    <input type="text" id="localisation-examen" list="liste-localisations-examen" placeholder="Localisation" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
-                    <datalist id="liste-localisations-examen">
-                        <option>Bras</option>
-                        <option>Mollet</option>
-                        <option>Ventre</option>
-                    </datalist>
+                    <select id="localisation-examen" name="localisation-examen" <?php echo ($page == $current_building_page)? "":"disabled"; ?>>
+                        <option value="0">Bras</option>
+                        <option value="1">Mollet</option>
+                        <option value="2">Ventre</option>
+                    </select>
                     <br />
                 <input type="submit" value="suivant" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
             </form>
@@ -88,25 +86,22 @@
         <div id="reglagesMedecins" class="<?php echo ($page == $current_building_page)? "":"disabled"; ?> reglagebox leftcolumn bottomrow">
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
                 <label for="operateur">Op&eacute;rateur :</label>
-                    <input type="text" id="operateur" list="liste-operateur" placeholder="Op&eacute;rateur" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
-                    <datalist id="liste-operateur">
+                    <select id="operateur" name="operateur" <?php echo ($page == $current_building_page)? "":"disabled"; ?>>
                         <option>Monsieur Stark</option>
                         <option>Madame Potts</option>
-                    </datalist>
+                    </select>
                     <br />
                 <label for="prescripteur">Prescripteur :</label>
-                    <input type="text" id="prescripteur" list="liste-prescripteur" placeholder="Prescripteur" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
-                    <datalist id="liste-prescripteur">
+                    <select id="prescripteur" name="prescripteur" <?php echo ($page == $current_building_page)? "":"disabled"; ?>>
                         <option>Monsieur Wayne</option>
                         <option>Madame Kyle</option>
-                    </datalist>
+                    </select>
                 <br />
                 <label for="realisateur">R&eacute;alisateur :</label>
-                    <input type="text" id="realisateur" list="liste-realisateur" placeholder="R&eacute;alisateur" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
-                    <datalist id="liste-realisateur">
+                    <select id="realisateur" name="realisateur" <?php echo ($page == $current_building_page)? "":"disabled"; ?>>
                         <option>Monsieur Rogers</option>
                         <option>Madame Carter</option>
-                    </datalist>
+                    </select>
                     <br />
                 <input type="submit" value="suivant" <?php echo ($page == $current_building_page)? "":"disabled"; ?> />
             </form>
