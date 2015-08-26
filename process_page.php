@@ -1,4 +1,5 @@
 <?php
+session_start();
 $page_number = 3;
 if(!isset($_GET['page']) || !is_numeric($_GET['page']) || $_GET['page'] >= $page_number)
 {
@@ -11,7 +12,8 @@ else
 switch($page)
 {
     case 0:
-        //TODO
+        $vars = array("id-patient", "nom-patient", "prenom-patient", "insee-patient",
+                      "sexe-patient","age-patient","poids-patient", "taille-patient");
         break;
     case 1:
         //TODO
@@ -19,8 +21,19 @@ switch($page)
     case 2:
         //TODO
         break;
+    default:
+        header('Location:./');
+        exit;
 }
 
-header('Location:./?page='.($page+1));
+foreach($vars as $var)
+    putToSession($var);
+
+header('Location:./?page='.(($page+1)%$page_number));
 exit;
+
+function putToSession($varName)
+{
+    $_SESSION[$varName] = htmlspecialchars($_POST[$varName]);
+}
 ?>
