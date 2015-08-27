@@ -35,7 +35,7 @@
                 <?php printInput("number", "age-patient", "Âge"); ?>
                 <?php printInput("number", "poids-patient", "Poids"); ?>
                 <?php printInput("number", "taille-patient", "Taille"); ?>
-                <input type="submit" value="suivant" <?php disable() ?> />
+                <?php printNextButton() ?>
             </form>
         </div>
         <?php ++$current_building_page; ?>
@@ -64,7 +64,8 @@
                         <option value="2">Ventre</option>
                     </select>
                     <br />
-                <input type="submit" value="suivant" <?php disable() ?> />
+                <?php printPreviousButton() ?>
+                <?php printNextButton() ?>
             </form>
         </div>
         <?php ++$current_building_page; ?>
@@ -88,7 +89,7 @@
                         <option>Madame Carter</option>
                     </select>
                     <br />
-                <input type="submit" value="suivant" <?php disable() ?> />
+                <?php printPreviousButton() ?>
             </form>
         </div>
         <div id="sauvegarder" class="reglagebox rightcolumn bottomrow">
@@ -137,5 +138,15 @@ function printRadioButton($id,$label,$buttons)
         echo '<label for="'.$id.'-'.$value.'">'.$buttonLabel.'</label>'."\n";
     }
     echo '<br />';
+}
+
+function printNextButton(){printSubmitButton("next","suivant");}
+function printPreviousButton(){printSubmitButton("previous","pr&eacute;cedent");}
+
+function printSubmitButton($name, $value)
+{
+    echo '<input type="submit" name="'.$name.'" value="'.$value.'" ';
+    disable();
+    echo '/>';
 }
 ?>

@@ -29,7 +29,9 @@ switch($page)
 foreach($vars as $var)
     putToSession($var);
 
-header('Location:./?page='.(($page+1)%$page_number));
+$nextpage = $page + ((isset($_POST['previous']))? -1 : +1) % $page_number;
+
+header('Location:./?page='.$nextpage);
 exit;
 
 function putToSession($varName)
