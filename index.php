@@ -154,7 +154,7 @@ function printNextButton(){printSubmitButton("next","suivant");}
 /**
  * @brief prints a "previous" submit button
  */
-function printPreviousButton(){printSubmitButton("previous","précedent");}
+function printPreviousButton(){printSubmitButton("previous","précédent");}
 
 /**
  * @brief prints a submit button
