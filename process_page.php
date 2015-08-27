@@ -16,7 +16,7 @@ switch($page)
                       "sexe-patient","age-patient","poids-patient", "taille-patient");
         break;
     case 1:
-        //TODO
+        $vars = array("position-examen","activite-examen","localisation-examen");
         break;
     case 2:
         //TODO
