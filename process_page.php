@@ -1,6 +1,6 @@
 <?php
 session_start();
-$page_number = 3;
+$page_number = 4;
 if(!isset($_GET['page']) || !is_numeric($_GET['page']) || $_GET['page'] >= $page_number)
 {
     header('Location:./');
@@ -21,6 +21,9 @@ switch($page)
     case 2:
         $vars = array("operateur","prescripteur","realisateur");
         break;
+    case 3:
+        //TODO: save to DB
+        session_destroy();
     default:
         header('Location:./');
         exit;

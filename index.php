@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $page_number = 3;
+    $page_number = 4;
     $current_building_page = 0;
     if(!isset($_GET['page']) || !is_numeric($_GET['page']))
         $page = 0;
@@ -56,11 +56,14 @@
                 <?php printDropDownMenu("prescripteur","Prescripteur",array("Monsieur Wayne", "Madame Kyle")); ?>
                 <?php printDropDownMenu("realisateur","Réalisateur",array("Monsieur Rogers", "Madame Carter")); ?>
                 <?php printPreviousButton() ?>
+                <?php printNextButton() ?>
             </form>
         </div>
-        <div id="sauvegarder" class="reglagebox rightcolumn bottomrow">
-            <input type="button" value="charger configuration"/>
-            <input type="button" value="sauvegarder"/>
+        <?php ++$current_building_page; ?>
+        <div id="sauvegarder" class="<?php disable() ?> reglagebox rightcolumn bottomrow">
+            <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
+                <? printSubmitButton("save","sauvegarder") //TODO ?>
+            </form>
         </div>
     </body>
 </html>
