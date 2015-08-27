@@ -64,7 +64,7 @@
         <?php ++$current_building_page; ?>
         <div id="sauvegarder" class="<?php disable() ?> reglagebox rightcolumn bottomrow">
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
-                <? printSubmitButton("save","sauvegarder") //TODO ?>
+                <? printSubmitButton("save","sauvegarder") ?>
             </form>
         </div>
     </body>
