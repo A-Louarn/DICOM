@@ -19,7 +19,7 @@ switch($page)
         $vars = array("position-examen","activite-examen","localisation-examen");
         break;
     case 2:
-        //TODO
+        $vars = array("operateur","prescripteur","realisateur");
         break;
     default:
         header('Location:./');
