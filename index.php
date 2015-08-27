@@ -6,6 +6,7 @@
         $page = 0;
     else
         $page = $_GET['page']%$page_number;
+    //TODO: load everything from DB
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,29 +42,9 @@
         <?php ++$current_building_page; ?>
         <div id="reglagesExamen" class="<?php disable() ?> reglagebox rightcolumn toprow">
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
-                <label for="position-examen">Position de l'examen :</label>
-                    <select id="position-examen" name="position-examen" <?php disable() ?>>
-                        <?php /*TODO: load from DB*/ ?>
-                       <option value="0">Debout</option>
-                       <option value="1">Allong&eacute;</option>
-                    </select>
-                    <br />
-                <label for="activite-examen">&Eacute;tat du muscle / activit&eacute; demand&eacute;e :</label>
-                    <select id="activite-examen" name="activites-examen" <?php disable() ?>>
-                        <?php /*TODO: load from DB*/ ?>
-                        <option value="0">Repos</option>
-                        <option value="1">Contraction</option>
-                        <option value="2">Extension</option>
-                    </select>
-                    <br />
-                <label for="localisation-examen">Localisation de l'examen :</label>
-                    <select id="localisation-examen" name="localisation-examen" <?php disable() ?>>
-                        <?php /*TODO: load from DB*/ ?>
-                        <option value="0">Bras</option>
-                        <option value="1">Mollet</option>
-                        <option value="2">Ventre</option>
-                    </select>
-                    <br />
+                <?php printDropDownMenu("position-examen","Position de l'examen",array(0=>"Debout",1=>"Allongé")); ?>
+                <?php printDropDownMenu("activite-examen","État du muscle / activité demandée",array(0=>"Repos",1=>"Contraction",2=>"Extension")); ?>
+                <?php printDropDownMenu("localisation-examen","Localisation de l'examen",array(0=>"Bras",1=>"Mollet",2=>"Ventre")); ?>
                 <?php printPreviousButton() ?>
                 <?php printNextButton() ?>
             </form>
@@ -71,24 +52,9 @@
         <?php ++$current_building_page; ?>
         <div id="reglagesMedecins" class="<?php disable() ?> reglagebox leftcolumn bottomrow">
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
-                <label for="operateur">Op&eacute;rateur :</label>
-                    <select id="operateur" name="operateur" <?php disable() ?>>
-                        <option>Monsieur Stark</option>
-                        <option>Madame Potts</option>
-                    </select>
-                    <br />
-                <label for="prescripteur">Prescripteur :</label>
-                    <select id="prescripteur" name="prescripteur" <?php disable() ?>>
-                        <option>Monsieur Wayne</option>
-                        <option>Madame Kyle</option>
-                    </select>
-                <br />
-                <label for="realisateur">R&eacute;alisateur :</label>
-                    <select id="realisateur" name="realisateur" <?php disable() ?>>
-                        <option>Monsieur Rogers</option>
-                        <option>Madame Carter</option>
-                    </select>
-                    <br />
+                <?php printDropDownMenu("operateur","Opérateur",array("Monsieur Stark", "Madame Potts")); ?>
+                <?php printDropDownMenu("prescripteur","Prescripteur",array("Monsieur Wayne", "Madame Kyle")); ?>
+                <?php printDropDownMenu("realisateur","Réalisateur",array("Monsieur Rogers", "Madame Carter")); ?>
                 <?php printPreviousButton() ?>
             </form>
         </div>
@@ -155,6 +121,29 @@ function printRadioButton($id,$label,$buttons)
         echo '<label for="'.$id.'-'.$value.'">'.$buttonLabel.'</label>'."\n";
     }
     echo '<br />';
+}
+
+/**
+ * @brief prints a drop-down menu
+ * @param $id the ID of the menu (must be unique in the page)
+ * @param $label the label associated with the menu
+ * @param $contents an associative array (value => text) containing the list of elements to be put on the drop-down menu
+ */
+function printDropDownMenu($id,$label,$contents)
+{
+    echo '<label for="'.$id.'">'.htmlentities($label).' :</label>'."\n";
+    echo '                    <select id="'.$id.'" name="'.$id.'" ';
+    disable();
+    echo '>'."\n";
+    foreach($contents as $value => $text)
+    {
+        echo '                       <option value="'.$value.'" ';
+        if(isset($_SESSION[$id]) && $_SESSION[$id] == $value)
+            echo 'selected';
+        echo '>'.htmlentities($text).'</option>'."\n";
+    }
+    echo '                    </select>';
+    echo '                    <br />';
 }
 
 /**
