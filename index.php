@@ -9,6 +9,7 @@
     //TODO: load everything from DB
 
     include_once('convenience_functions.php');
+    $db = openDB();
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,6 @@
         <title>DICOM - utilisateur</title>
         <link rel="stylesheet" href="./UI.css" />
         <meta charset="utf-8" />
-<!--        <?php print_r($_SESSION); ?>-->
     </head>
     <body>
         <div id="reglagesPatient" class="<?php disable() ?> reglagebox leftcolumn toprow">
@@ -54,9 +54,9 @@
         <?php ++$current_building_page; ?>
         <div id="reglagesMedecins" class="<?php disable() ?> reglagebox leftcolumn bottomrow">
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
-                <?php printDropDownMenu("operateur","Opérateur",array("Monsieur Stark", "Madame Potts")); ?>
-                <?php printDropDownMenu("prescripteur","Prescripteur",array("Monsieur Wayne", "Madame Kyle")); ?>
-                <?php printDropDownMenu("realisateur","Réalisateur",array("Monsieur Rogers", "Madame Carter")); ?>
+                <?php printDropDownMenu("operateur","Opérateur",loadOperateurs($db)); ?>
+                <?php printDropDownMenu("prescripteur","Prescripteur",loadPrescripteurs($db)); ?>
+                <?php printDropDownMenu("realisateur","Réalisateur",loadRealisateurs($db)); ?>
                 <?php printPreviousButton() ?>
                 <?php printNextButton() ?>
             </form>

@@ -1,5 +1,46 @@
 <?php
 /**
+ * @brief opens the database and returns a handler to interact with
+ * @return a handler to the database
+ */
+function openDB()
+{
+    try
+    {
+        //FUTURE: change this to the production database
+        $dbh = new PDO("mysql:host=localhost;dbname=dicom;charset=utf8",'root','root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        return $dbh;
+    }
+    catch(PDOException $e)
+    {
+        echo $e->getMessage();
+    }
+}
+
+/**
+ * @brief loads a list of medics from the database
+ * @param $db a database handler
+ * @param $tableName the name of the table where are the medics
+ * @param $columnName the name of the column where the medics' names are
+ */
+function loadMedics($db, $tableName, $columnName)
+{
+
+    $sql = $db->query('SELECT * FROM '.$tableName.';');
+
+    while($data = $sql->fetch())
+        $medics[$data[$columnName]] = $data[$columnName];
+
+    $sql->closeCursor();
+
+    return $medics;
+}
+
+function loadOperateurs($db){return loadMedics($db,"Operateur", "operateur_name");}
+function loadPrescripteurs($db){return loadMedics($db,"Realisateur", "realisateur_performingPhysicianName");}
+function loadRealisateurs($db){return loadMedics($db,"Prescripteur", "prescripteur_referringPhysicianName");}
+
+/**
  * @brief writes "disabled" if the current page is the page that is being built
  * it is used to disable the form inputs where necessary
  */
@@ -46,7 +87,7 @@ function printRadioButton($id,$label,$buttons)
     {
         $buttonLabel = htmlentities($buttonLabel);
         echo '<input type="radio" name="'.$id.'" id="'.$id.'-'.$value.'" value="'.$value.'" ';
-        if($_SESSION[$id] == $value)
+        if(isset($_SESSION[$id]) && $_SESSION[$id] == $value)
             echo "checked ";
         disable();
         echo ' />'."\n";
@@ -74,8 +115,8 @@ function printDropDownMenu($id,$label,$contents)
             echo 'selected';
         echo '>'.htmlentities($text).'</option>'."\n";
     }
-    echo '                    </select>';
-    echo '                    <br />';
+    echo '                    </select>'."\n";
+    echo '                    <br />'."\n";
 }
 
 /**
