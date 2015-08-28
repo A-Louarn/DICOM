@@ -27,8 +27,8 @@
             </form>
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
                 <?php printInput("number", "patient_insee", "Numéro INSEE");?>
-                <?php printInput("text", "patient_LastName", "Prénom du patient");?>
-                <?php printInput("text", "patient_firstName", "Nom du patient");?>
+                <?php printInput("text", "patient_firstName", "Prénom du patient");?>
+                <?php printInput("text", "patient_lastName", "Nom du patient");?>
                 <?php printInput("date", "patient_dateOfBirth", "Date de naissance"); ?>
                 <?php printRadioButton("patient_sex", "Sexe", array("F"=>"Femme","M"=>"Homme","O"=>"Autre")); ?>
                 <?php printInput("number", "patient_size", "Taille"); ?>
