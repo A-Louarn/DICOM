@@ -2,40 +2,19 @@
 -- Table `Patient`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Patient` (
-    `patient_id` INTEGER PRIMARY KEY,
-    `patient_name` VARCHAR(255) NOT NULL,
+    `patient_insee` INTEGER NOT NULL,
+    `patient_firstName` VARCHAR(255) NOT NULL,
+    `patient_lastName` VARCHAR(255) NOT NULL,
     `patient_dateOfBirth` DATE NOT NULL,
     `patient_sex` VARCHAR(1) NOT NULL,
     `patient_size` INTEGER NOT NULL,
     `patient_weight` INTEGER NOT NULL,
-    `patient_typeOfID` VARCHAR(255) NOT NULL,
-    `patient_adress` VARCHAR(255) NULL,
-    `patient_insurancePlanIdentification` VARCHAR(255) NULL,
-    `patient_contryOfResidence` VARCHAR(255) NOT NULL,
-    `patient_telephoneNumber` INTEGER NULL,
-    `patient_additionalHistory` TEXT NULL
-);
-
-
--- -----------------------------------------------------
--- Table `Examen`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Examen` (
-    `examen_accessionNumber` INTEGER PRIMARY KEY,
-    `examen_instanceCreationDate` DATE NOT NULL,
-    `examen_instanceCreationTime` DATETIME NOT NULL,
-    `examen_procedureCodeSequence` VARCHAR(255) NOT NULL,
-    `examen_institutionalDepartementName` VARCHAR(255) NULL,
-    `examen_protocolName` VARCHAR(255) NOT NULL,
-    `examen_anatomicRegionSequence` VARCHAR(255) NOT NULL,
-    `examen_anatomicOrientationType` VARCHAR(255) NOT NULL,
-    `examen_bodyPartExamined` VARCHAR(255) NOT NULL,
-    `examen_patientPosition` VARCHAR(255) NOT NULL,
-    `examen_performedProcedureStepID` VARCHAR(255) NOT NULL,
-    `examen_performedProcedureStepDescription` VARCHAR(255) NOT NULL,
-    `examen_contentDate` DATE NOT NULL,
-    `examen_contentTime` DATETIME NOT NULL,
-    `examen_instanceCreatorUID` VARCHAR(255) NOT NULL
+    `patient_typeOfID` VARCHAR(255) NOT NULL, -- //TODO: const = "INSEE"
+    `patient_adress` VARCHAR(255) NULL, -- no-form
+    `patient_insurancePlanIdentification` VARCHAR(255) NULL, -- //TODO: const = "INSEE"
+    `patient_contryOfResidence` VARCHAR(255) NOT NULL, -- //TODO: drop-down list (france Selected)
+    `patient_telephoneNumber` INTEGER NULL, -- //TODO
+    `patient_additionalHistory` TEXT NULL -- no-form
 );
 
 
@@ -43,7 +22,6 @@ CREATE TABLE IF NOT EXISTS `Examen` (
 -- Table `Opérateur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Operateur` (
-    `operateur_id` INTEGER PRIMARY KEY
     `operateur_name` VARCHAR(255) NOT NULL
 );
 
@@ -52,7 +30,6 @@ CREATE TABLE IF NOT EXISTS `Operateur` (
 -- Table `Realisateur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Realisateur` (
-    `realisateur_id` INTEGER PRIMARY KEY,
     `realisateur_performingPhysicianName` VARCHAR(255) NOT NULL
 );
 
@@ -61,10 +38,8 @@ CREATE TABLE IF NOT EXISTS `Realisateur` (
 -- Table `Prescripteur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Prescripteur` (
-    `prescripteur_id` INTEGER PRIMARY KEY;
     `prescripteur_referringPhysicianName` VARCHAR(255) NOT NULL
 );
-
 
 -- -----------------------------------------------------
 -- Table `Site`
@@ -72,6 +47,31 @@ CREATE TABLE IF NOT EXISTS `Prescripteur` (
 CREATE TABLE IF NOT EXISTS `Site` (
     `InstitutionName` VARCHAR(255) PRIMARY KEY,
     `InstitutionAdress` VARCHAR(255) NOT NULL
+);
+
+-- -----------------------------------------------------
+-- Table `Examen`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Examen` (
+    `examen_accessionNumber` INTEGER PRIMARY KEY, -- //TODO: auto-increment
+    `examen_instanceCreationDateTime` DATETIME NOT NULL, -- //TODO: auto
+    `examen_procedureCodeSequence` VARCHAR(255) NOT NULL, -- //TODO: no-form
+    `examen_institutionalDepartementName` VARCHAR(255) NULL, -- //TODO: service (link to other table)
+    `examen_protocolName` VARCHAR(255) NOT NULL, -- //TODO: const = ?
+    `examen_anatomicRegionSequence` VARCHAR(255) NOT NULL, -- //TODO: link to new table (bodyPart)
+    `examen_anatomicOrientationType` VARCHAR(255) NOT NULL, -- //TODO: link to new table (état du muscle / activité)
+    `examen_bodyPartExamined` VARCHAR(255) NOT NULL, -- //TODO: link to new table (bodyPart)
+    `examen_patientPosition` VARCHAR(255) NOT NULL, -- TODO: link to new table (position)
+    `examen_performedProcedureStepID` VARCHAR(255) NOT NULL, -- //TODO: const = default
+    `examen_performedProcedureStepDescription` VARCHAR(255) NULL, -- //TODO: no-form
+    `examen_contentDateTime` DATETIME NOT NULL, -- //TODO: auto (== instanceCreationDateTime)
+    `examen_instanceCreatorUID` VARCHAR(255) NOT NULL, -- //TODO: const = default
+    `operateur_name` VARCHAR(255) NOT NULL,
+    `realisateur_performingPhysicianName` VARCHAR(255) NOT NULL,
+    `prescripteur_referringPhysicianName` VARCHAR(255) NOT NULL,
+    FOREIGN KEY(operateur_name) REFERENCES Operateur(operateur_name),
+    FOREIGN KEY(realisateur_performingPhysicianName) REFERENCES Realisateur(realisateur_performingPhysicianName),
+    FOREIGN KEY(prescripteur_referringPhysicianName) REFERENCES Prescripteur(prescripteur_referringPhysicianName)
 );
 
 
