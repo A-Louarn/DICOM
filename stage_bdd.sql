@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `Bodypart` (
 );
 
 -- -----------------------------------------------------
--- Table `Position`
+-- Table `Posture`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Posture` (
     `posture_name` VARCHAR(255) PRIMARY KEY
