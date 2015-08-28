@@ -2,7 +2,7 @@
 -- Table `Patient`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Patient` (
-    `patient_insee` INTEGER NOT NULL,
+    `patient_insee` INTEGER PRIMARY KEY,
     `patient_firstName` VARCHAR(255) NOT NULL,
     `patient_lastName` VARCHAR(255) NOT NULL,
     `patient_dateOfBirth` DATE NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `Patient` (
 -- Table `Opérateur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Operateur` (
-    `operateur_name` VARCHAR(255) NOT NULL
+    `operateur_name` VARCHAR(255) PRIMARY KEY
 );
 
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `Operateur` (
 -- Table `Realisateur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Realisateur` (
-    `realisateur_performingPhysicianName` VARCHAR(255) NOT NULL
+    `realisateur_performingPhysicianName` VARCHAR(255) PRIMARY KEY
 );
 
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `Realisateur` (
 -- Table `Prescripteur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Prescripteur` (
-    `prescripteur_referringPhysicianName` VARCHAR(255) NOT NULL
+    `prescripteur_referringPhysicianName` VARCHAR(255) PRIMARY KEY
 );
 
 -- -----------------------------------------------------
@@ -215,8 +215,8 @@ CREATE TABLE IF NOT EXISTS `Signal` (
 -- Table `Patient_has_Examen`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Patient_has_Examen` (
-    `patient_id` INTEGER NOT NULL,
+    `patient_insee` INTEGER NOT NULL,
     `examen_accessionNumber` INTEGER NOT NULL,
-    FOREIGN KEY(patient_id) REFERENCES Patient(patient_id),
+    FOREIGN KEY(patient_insee) REFERENCES Patient(patient_insee),
     FOREIGN KEY(examen_accessionNumber) REFERENCES Examen(examen_accessionNumber)
 );
