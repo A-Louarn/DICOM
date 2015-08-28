@@ -18,6 +18,23 @@ function openDB()
 }
 
 /**
+ * @brief loads the patients from DB
+ * @param $db the database to use
+ * @return an array containing the insee number and names of the patients (each row is an array of type "insee => name")
+ */
+function loadPatients($db)
+{
+    $sql = $db->query('SELECT patient_insee, patient_firstName, patient_lastName FROM Patient ORDER BY patient_lastName, patient_firstName;');
+
+    while($data = $sql->fetch())
+        $patients[] = array('insee'=>$data['patient_insee'], 'name'=>$data['patient_lastName'].' '.$data['patient_firstName'].' ('.$data['patient_insee'].')');
+
+    $sql->closeCursor();
+
+    return $patients;
+}
+
+/**
  * @brief loads a list of medics from the database
  * @param $db a database handler
  * @param $tableName the name of the table where are the medics
@@ -139,6 +156,19 @@ function printSubmitButton($name, $value)
     echo '<input type="submit" name="'.$name.'" value="'.htmlentities($value).'" ';
     disable();
     echo '/>';
+}
+
+/**
+ * @brief prints a datalist
+ * @param $id the ID of the datalist (must be unique in the page)
+ * @param $content an array containing the list to be displayed (an array where each row is in the form of "value => display name")
+ */
+function printDataList($id,$content)
+{
+    echo '<datalist id="'.$id.'">'."\n";
+    foreach($content as $row)
+        echo '<option value="'.$row['insee'].'">'.$row['name'].'</option>'."\n";
+    echo '                </datalist>'."\n";
 }
 
 /**

@@ -20,15 +20,11 @@
     </head>
     <body>
         <div id="reglagesPatient" class="<?php disable() ?> reglagebox leftcolumn toprow">
-            <div>
-                <input type="text" id="chargerPatient" list="liste-charger-patient" placeholder="Nom du patient &agrave; charger" <?php disable() ?> />
-                <datalist id="liste-charger-patient">
-                    <?php
-                        //TODO: load list from DB
-                    ?>
-                </datalist>
-                <input type="button" id="boutonChargerPatient" value="Charger patient" <?php disable() ?> />
-            </div>
+            <form action="load_patient.php" method="post">
+                <input type="text" id="chargerPatient" name="patient_loading" list="liste-charger-patient" placeholder="Nom du patient &agrave; charger" <?php disable() ?> />
+                <?php printDatalist("liste-charger-patient",loadPatients($db)) ?>
+                <input type="submit" id="boutonChargerPatient" value="Charger patient" <?php disable() ?> />
+            </form>
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
                 <?php printInput("number", "patient_insee", "Numéro INSEE");?>
                 <?php printInput("text", "patient_LastName", "Prénom du patient");?>
