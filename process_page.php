@@ -9,36 +9,15 @@ if(!isset($_GET['page']) || !is_numeric($_GET['page']) || $_GET['page'] >= $page
 else
     $page = $_GET['page'];
 
-switch($page)
+foreach($_POST as $varName => $value)
 {
-    case 0:
-        $vars = array("id-patient", "nom-patient", "prenom-patient", "insee-patient",
-                      "sexe-patient","age-patient","poids-patient", "taille-patient");
-        break;
-    case 1:
-        $vars = array("position-examen","activite-examen","localisation-examen");
-        break;
-    case 2:
-        $vars = array("operateur","prescripteur","realisateur");
-        break;
-    case 3:
-        //TODO: save to DB
-        session_destroy();
-    default:
-        header('Location:./');
-        exit;
+    $_SESSION[$varName] = htmlspecialchars($value);
 }
 
-foreach($vars as $var)
-    putToSession($var);
 
 $nextpage = $page + ((isset($_POST['previous']))? -1 : +1) % $page_number;
 
 header('Location:./?page='.$nextpage);
 exit;
 
-function putToSession($varName)
-{
-    $_SESSION[$varName] = htmlspecialchars($_POST[$varName]);
-}
 ?>
