@@ -40,9 +40,9 @@
         <?php ++$current_building_page; ?>
         <div id="reglagesExamen" class="<?php disable() ?> reglagebox rightcolumn toprow">
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
-                <?php printDropDownMenu("position-examen","Position de l'examen",array(0=>"Debout",1=>"Allongé")); ?>
-                <?php printDropDownMenu("activite-examen","État du muscle / activité demandée",array(0=>"Repos",1=>"Contraction",2=>"Extension")); ?>
-                <?php printDropDownMenu("localisation-examen","Localisation de l'examen",array(0=>"Bras",1=>"Mollet",2=>"Ventre")); ?>
+                <?php printDropDownMenu("position-examen","Position de l'examen",loadAnatomicOrientation($db)); ?>
+                <?php printDropDownMenu("activite-examen","État du muscle / activité demandée",loadPosture($db)); ?>
+                <?php printDropDownMenu("localisation-examen","Localisation de l'examen", loadBodyparts($db)); ?>
                 <?php printPreviousButton() ?>
                 <?php printNextButton() ?>
             </form>

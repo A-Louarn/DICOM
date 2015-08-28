@@ -35,27 +35,37 @@ function loadPatients($db)
 }
 
 /**
- * @brief loads a list of medics from the database
+ * @brief loads a list from the database
  * @param $db a database handler
- * @param $tableName the name of the table where are the medics
- * @param $columnName the name of the column where the medics' names are
+ * @param $tableName the name of the table where is the list stored
  */
-function loadMedics($db, $tableName, $columnName)
+function loadList($db, $tableName)
 {
-
     $sql = $db->query('SELECT * FROM '.$tableName.';');
 
+    $list = array();
+
     while($data = $sql->fetch())
-        $medics[$data[$columnName]] = $data[$columnName];
+    {
+        if(count($data)/2 == 1)
+            $list[$data[0]] = $data[0];
+        else if(count($data)/2 == 2)
+            $list[$data[0]] = $data[1];
+        else
+            exit();
+    }
 
     $sql->closeCursor();
 
-    return $medics;
+    return $list;
 }
 
-function loadOperateurs($db){return loadMedics($db,"Operateur", "operateur_name");}
-function loadPrescripteurs($db){return loadMedics($db,"Realisateur", "realisateur_performingPhysicianName");}
-function loadRealisateurs($db){return loadMedics($db,"Prescripteur", "prescripteur_referringPhysicianName");}
+function loadOperateurs($db){return loadList($db,"Operateur");}
+function loadPrescripteurs($db){return loadList($db,"Realisateur");}
+function loadRealisateurs($db){return loadList($db,"Prescripteur");}
+function loadBodyparts($db){return loadList($db,"Bodypart");}
+function loadPosture($db){return loadList($db,"Posture");}
+function loadAnatomicOrientation($db){return loadList($db,"AnatomicOrientation");}
 
 /**
  * @brief writes "disabled" if the current page is the page that is being built
