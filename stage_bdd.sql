@@ -43,10 +43,8 @@ CREATE TABLE IF NOT EXISTS `Examen` (
 -- Table `Opérateur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Operateur` (
-    `operateur_idSequence` VARCHAR(2) PRIMARY KEY,
-    `operateur_name` VARCHAR(255) NOT NULL,
-    `examen_accessionNumber` INTEGER NOT NULL,
-    FOREIGN KEY(examen_accessionNumber) REFERENCES Examen(examen_accessionNumber)
+    `operateur_id` INTEGER PRIMARY KEY
+    `operateur_name` VARCHAR(255) NOT NULL
 );
 
 
@@ -54,10 +52,8 @@ CREATE TABLE IF NOT EXISTS `Operateur` (
 -- Table `Realisateur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Realisateur` (
-    `realisateur_performingPhysicianIDSequence` VARCHAR(2) PRIMARY KEY,
-    `realisateur_performingPhysicianName` VARCHAR(255) NOT NULL,
-    `examen_accessionNumber` INTEGER NOT NULL,
-    FOREIGN KEY(examen_accessionNumber) REFERENCES Examen(examen_accessionNumber)
+    `realisateur_id` INTEGER PRIMARY KEY,
+    `realisateur_performingPhysicianName` VARCHAR(255) NOT NULL
 );
 
 
@@ -65,10 +61,8 @@ CREATE TABLE IF NOT EXISTS `Realisateur` (
 -- Table `Prescripteur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Prescripteur` (
-    `prescripteur_referringPhysicianIDSequence` VARCHAR(2) PRIMARY KEY,
-    `prescripteur_referringPhysicianName` VARCHAR(255) NOT NULL,
-    `examen_accessionNumber` INTEGER NOT NULL,
-    FOREIGN KEY(examen_accessionNumber) REFERENCES Examen(examen_accessionNumber)
+    `prescripteur_id` INTEGER PRIMARY KEY;
+    `prescripteur_referringPhysicianName` VARCHAR(255) NOT NULL
 );
 
 
