@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `Patient` (
     `patient_typeOfID` VARCHAR(255) NOT NULL, -- //TODO: const = "INSEE"
     `patient_adress` VARCHAR(255) NULL, -- no-form
     `patient_insurancePlanIdentification` VARCHAR(255) NULL, -- //TODO: const = "INSEE"
-    `patient_contryOfResidence` VARCHAR(255) NOT NULL, -- //TODO: drop-down list (france Selected)
+    `patient_countryOfResidence` VARCHAR(255) NOT NULL, -- //TODO: drop-down list (france Selected)
     `patient_telephoneNumber` INTEGER NULL, -- //TODO
     `patient_additionalHistory` TEXT NULL -- no-form
 );
