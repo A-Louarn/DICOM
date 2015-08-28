@@ -50,6 +50,28 @@ CREATE TABLE IF NOT EXISTS `Site` (
 );
 
 -- -----------------------------------------------------
+-- Table `Bodypart`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Bodypart` (
+    `bodyPart_anatomicRegionSequence` VARCHAR(255) PRIMARY KEY,
+    `bodyPart_Examined` VARCHAR(255) NOT NULL
+);
+
+-- -----------------------------------------------------
+-- Table `Position`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Posture` (
+    `posture_name` VARCHAR(255) PRIMARY KEY
+);
+
+-- -----------------------------------------------------
+-- Table `AnatomicOrientation`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AnatomicOrientation` (
+    `anatomicOrientation_name` VARCHAR(255) PRIMARY KEY
+);
+
+-- -----------------------------------------------------
 -- Table `Examen`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Examen` (
@@ -58,17 +80,19 @@ CREATE TABLE IF NOT EXISTS `Examen` (
     `examen_procedureCodeSequence` VARCHAR(255) NOT NULL, -- //TODO: no-form
     `examen_institutionalDepartementName` VARCHAR(255) NULL, -- //TODO: service (link to other table)
     `examen_protocolName` VARCHAR(255) NOT NULL, -- //TODO: const = ?
-    `examen_anatomicRegionSequence` VARCHAR(255) NOT NULL, -- //TODO: link to new table (bodyPart)
-    `examen_anatomicOrientationType` VARCHAR(255) NOT NULL, -- //TODO: link to new table (état du muscle / activité)
-    `examen_bodyPartExamined` VARCHAR(255) NOT NULL, -- //TODO: link to new table (bodyPart)
-    `examen_patientPosition` VARCHAR(255) NOT NULL, -- TODO: link to new table (position)
     `examen_performedProcedureStepID` VARCHAR(255) NOT NULL, -- //TODO: const = default
     `examen_performedProcedureStepDescription` VARCHAR(255) NULL, -- //TODO: no-form
     `examen_contentDateTime` DATETIME NOT NULL, -- //TODO: auto (== instanceCreationDateTime)
     `examen_instanceCreatorUID` VARCHAR(255) NOT NULL, -- //TODO: const = default
+    `bodyPart_anatomicRegionSequence` VARCHAR(255) NOT NULL,
+    `anatomicOrientation_name` VARCHAR(255) NOT NULL,
+    `posture_name` VARCHAR(255) NOT NULL,
     `operateur_name` VARCHAR(255) NOT NULL,
     `realisateur_performingPhysicianName` VARCHAR(255) NOT NULL,
     `prescripteur_referringPhysicianName` VARCHAR(255) NOT NULL,
+    FOREIGN KEY(bodyPart_anatomicRegionSequence) REFERENCES Bodypart(bodyPart_anatomicRegionSequence),
+    FOREIGN KEY(anatomicOrientation_name) REFERENCES AnatomicOrientation(anatomicOrientation_name),
+    FOREIGN KEY(posture_name) REFERENCES Posture(posture_name),
     FOREIGN KEY(operateur_name) REFERENCES Operateur(operateur_name),
     FOREIGN KEY(realisateur_performingPhysicianName) REFERENCES Realisateur(realisateur_performingPhysicianName),
     FOREIGN KEY(prescripteur_referringPhysicianName) REFERENCES Prescripteur(prescripteur_referringPhysicianName)
