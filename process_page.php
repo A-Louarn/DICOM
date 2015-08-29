@@ -57,8 +57,6 @@ function saveToDB()
 
     $patientSQL->closeCursor();
 
-
-    //TODO: save to DB for examen
     $examenSQL = $db->prepare('INSERT INTO Examen (
             examen_instanceCreationDateTime,
             examen_procedureCodeSequence,
@@ -78,7 +76,7 @@ function saveToDB()
         VALUES (
             :time,
             \'DEFAULT PROCEDURE CODE SEQUENCE\',
-            \'//TODO\',
+            \'TODO\',
             \'DEFAULT PROTOCOL\',
             \'DEFAULT PROCEDURE STEP ID\',
             \'DEFAULT PROCEDURE STEP DESCRIPTION\',

@@ -6,7 +6,6 @@
         $page = 0;
     else
         $page = $_GET['page']%$page_number;
-    //TODO: load everything from DB
 
     include_once('convenience_functions.php');
     $db = openDB();
