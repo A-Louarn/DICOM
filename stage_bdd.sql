@@ -9,12 +9,12 @@ CREATE TABLE IF NOT EXISTS `Patient` (
     `patient_sex` VARCHAR(1) NOT NULL,
     `patient_size` INTEGER NOT NULL,
     `patient_weight` INTEGER NOT NULL,
-    `patient_typeOfID` VARCHAR(255) NOT NULL, -- //TODO: const = "INSEE"
-    `patient_adress` VARCHAR(255) NULL, -- no-form
-    `patient_insurancePlanIdentification` VARCHAR(255) NULL, -- //TODO: const = "INSEE"
-    `patient_countryOfResidence` VARCHAR(255) NOT NULL, -- //TODO: drop-down list (france Selected)
-    `patient_telephoneNumber` INTEGER NULL, -- //TODO
-    `patient_additionalHistory` TEXT NULL -- no-form
+    `patient_typeOfID` VARCHAR(255) NOT NULL,
+    `patient_adress` VARCHAR(255) NULL,
+    `patient_insurancePlanIdentification` VARCHAR(255) NULL,
+    `patient_countryOfResidence` VARCHAR(255) NOT NULL,
+    `patient_telephoneNumber` INTEGER NULL,
+    `patient_additionalHistory` TEXT NULL
 );
 
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `AnatomicOrientation` (
 -- Table `Examen`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Examen` (
-    `examen_accessionNumber` INTEGER PRIMARY KEY, -- //TODO: auto-increment
+    `examen_accessionNumber` INTEGER PRIMARY KEY AUTO_INCREMENT, -- //TODO: auto-increment
     `examen_instanceCreationDateTime` DATETIME NOT NULL, -- //TODO: auto
     `examen_procedureCodeSequence` VARCHAR(255) NOT NULL, -- //TODO: no-form
     `examen_institutionalDepartementName` VARCHAR(255) NULL, -- //TODO: service (link to other table)
@@ -90,12 +90,14 @@ CREATE TABLE IF NOT EXISTS `Examen` (
     `operateur_name` VARCHAR(255) NOT NULL,
     `realisateur_performingPhysicianName` VARCHAR(255) NOT NULL,
     `prescripteur_referringPhysicianName` VARCHAR(255) NOT NULL,
+    `patient_insee` INTEGER NOT NULL,
     FOREIGN KEY(bodyPart_anatomicRegionSequence) REFERENCES Bodypart(bodyPart_anatomicRegionSequence),
     FOREIGN KEY(anatomicOrientation_name) REFERENCES AnatomicOrientation(anatomicOrientation_name),
     FOREIGN KEY(posture_name) REFERENCES Posture(posture_name),
     FOREIGN KEY(operateur_name) REFERENCES Operateur(operateur_name),
     FOREIGN KEY(realisateur_performingPhysicianName) REFERENCES Realisateur(realisateur_performingPhysicianName),
-    FOREIGN KEY(prescripteur_referringPhysicianName) REFERENCES Prescripteur(prescripteur_referringPhysicianName)
+    FOREIGN KEY(prescripteur_referringPhysicianName) REFERENCES Prescripteur(prescripteur_referringPhysicianName),
+    FOREIGN KEY(patient_insee) REFERENCES Patient(patient_insee)
 );
 
 
@@ -232,15 +234,4 @@ CREATE TABLE IF NOT EXISTS `Signal` (
     `signal_notchFilterBandwitdh` INTEGER NULL,
     `signal_measurementUnit` TEXT NOT NULL,
     `signal_waveformSequence` VARCHAR(255) NOT NULL
-);
-
-
--- -----------------------------------------------------
--- Table `Patient_has_Examen`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Patient_has_Examen` (
-    `patient_insee` INTEGER NOT NULL,
-    `examen_accessionNumber` INTEGER NOT NULL,
-    FOREIGN KEY(patient_insee) REFERENCES Patient(patient_insee),
-    FOREIGN KEY(examen_accessionNumber) REFERENCES Examen(examen_accessionNumber)
 );

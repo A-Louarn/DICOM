@@ -40,9 +40,9 @@
         <?php ++$current_building_page; ?>
         <div id="reglagesExamen" class="<?php disable() ?> reglagebox rightcolumn toprow">
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
-                <?php printDropDownMenu("position-examen","Position de l'examen",loadAnatomicOrientation($db)); ?>
-                <?php printDropDownMenu("activite-examen","État du muscle / activité demandée",loadPosture($db)); ?>
-                <?php printDropDownMenu("localisation-examen","Localisation de l'examen", loadBodyparts($db)); ?>
+                <?php printDropDownMenu("examen_anatomicOrientation","Position de l'examen",loadAnatomicOrientation($db)); ?>
+                <?php printDropDownMenu("examen_posture","État du muscle / activité demandée",loadPosture($db)); ?>
+                <?php printDropDownMenu("examen_bodyPart","Localisation de l'examen", loadBodyparts($db)); ?>
                 <?php printPreviousButton() ?>
                 <?php printNextButton() ?>
             </form>
@@ -50,9 +50,9 @@
         <?php ++$current_building_page; ?>
         <div id="reglagesMedecins" class="<?php disable() ?> reglagebox leftcolumn bottomrow">
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
-                <?php printDropDownMenu("operateur","Opérateur",loadOperateurs($db)); ?>
-                <?php printDropDownMenu("prescripteur","Prescripteur",loadPrescripteurs($db)); ?>
-                <?php printDropDownMenu("realisateur","Réalisateur",loadRealisateurs($db)); ?>
+                <?php printDropDownMenu("medic_operateur", "Opérateur", loadOperateurs($db)); ?>
+                <?php printDropDownMenu("medic_prescripteur", "Prescripteur", loadPrescripteurs($db)); ?>
+                <?php printDropDownMenu("medic_realisateur", "Réalisateur", loadRealisateurs($db)); ?>
                 <?php printPreviousButton() ?>
                 <?php printNextButton() ?>
             </form>

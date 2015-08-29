@@ -30,7 +30,7 @@ function saveToDB()
     $db = openDB();
 
     //Patient table
-    $sql = $db->prepare('INSERT INTO Patient (
+    $patientSQL = $db->prepare('INSERT INTO Patient (
             patient_insee, patient_firstName, patient_lastName, patient_dateOfBirth, patient_sex, patient_size, patient_weight,
             patient_typeOfID, patient_insurancePlanIdentification, patient_countryOfResidence)
             VALUES (
@@ -45,7 +45,7 @@ function saveToDB()
             patient_weight=:weight,
             patient_countryOfResidence=:countryOfResidence;');
 
-    $sql->execute(array(
+    $patientSQL->execute(array(
         'insee'=>$_SESSION['patient_insee'],
         'firstName'=>$_SESSION['patient_firstName'],
         'lastName'=>$_SESSION['patient_lastName'],
@@ -56,6 +56,55 @@ function saveToDB()
         'countryOfResidence'=>$_SESSION['patient_countryOfResidence']
     ));
 
+    $patientSQL->closeCursor();
+
+
     //TODO: save to DB for examen
+    $examenSQL = $db->prepare('INSERT INTO Examen (
+            examen_instanceCreationDateTime,
+            examen_procedureCodeSequence,
+            examen_institutionalDepartementName,
+            examen_protocolName,
+            examen_performedProcedureStepID,
+            examen_performedProcedureStepDescription,
+            examen_contentDateTime,
+            examen_instanceCreatorUID,
+            bodyPart_anatomicRegionSequence,
+            anatomicOrientation_name,
+            posture_name,
+            operateur_name,
+            realisateur_performingPhysicianName,
+            prescripteur_referringPhysicianName,
+            patient_insee)
+        VALUES (
+            :time,
+            \'DEFAULT PROCEDURE CODE SEQUENCE\',
+            \'//TODO\',
+            \'DEFAULT PROTOCOL\',
+            \'DEFAULT PROCEDURE STEP ID\',
+            \'DEFAULT PROCEDURE STEP DESCRIPTION\',
+            :time,
+            \'DEFAULT INSTANCE CREATOR UID\',
+            :bodyPart,
+            :anatomicOrientation,
+            :posture,
+            :operateur,
+            :realisateur,
+            :prescipteur,
+            :insee
+        );');
+
+    $examenSQL->execute(array(
+        'time'=>date("Y-m-d H:i:s"),
+        'bodyPart'=>$_SESSION['examen_bodyPart'],
+        'anatomicOrientation'=>$_SESSION['examen_anatomicOrientation'],
+        'posture'=>$_SESSION['examen_posture'],
+        'operateur'=>$_SESSION['medic_operateur'],
+        'realisateur'=>$_SESSION['medic_prescripteur'],
+        'prescipteur'=>$_SESSION['medic_realisateur'],
+        'insee'=>$_SESSION['patient_insee']
+    ));
+
+    $examenSQL->closeCursor();
 }
 ?>
