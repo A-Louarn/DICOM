@@ -104,7 +104,7 @@ function printInput($type,$id,$label,$required)
         echo 'value="'.$_SESSION[$id].'" ';
     disable();
     if($required)
-        echo 'required';
+        echo ' required';
     echo ' />'."\n";
 
     echo '                <br />'."\n";
@@ -131,7 +131,7 @@ function printRadioButton($id,$label,$buttons,$required)
             echo "checked ";
         disable();
         if($required)
-            echo 'required';
+            echo ' required';
         echo ' />'."\n";
         echo '<label for="'.$id.'-'.$value.'">'.$buttonLabel.'</label>'."\n";
     }
