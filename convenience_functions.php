@@ -68,6 +68,15 @@ function loadPosture($db){return loadList($db,"Posture");}
 function loadAnatomicOrientation($db){return loadList($db,"AnatomicOrientation");}
 
 /**
+ * @brief write the content of the $_POST variable to the $_SESSION var
+ */
+function writePOSTtoSESSION()
+{
+    foreach($_POST as $key => $value)
+        $_SESSION[$key] = htmlspecialchars($value);
+}
+
+/**
  * @brief writes "disabled" if the current page is the page that is being built
  * it is used to disable the form inputs where necessary
  */

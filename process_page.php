@@ -16,8 +16,7 @@ if($page == $page_number - 1)
     session_destroy();
 }
 else
-    foreach($_POST as $varName => $value)
-        $_SESSION[$varName] = htmlspecialchars($value);
+    writePOSTtoSESSION();
 
 
 $nextpage = $page + ((isset($_POST['previous']))? -1 : +1) % $page_number;
