@@ -26,14 +26,14 @@
                 <input type="submit" id="boutonChargerPatient" value="Charger patient" <?php disable() ?> />
             </form>
             <form action="./process_page.php?page=<?php echo $current_building_page ?>" method="post">
-                <?php printInput("number", "patient_insee", "Numéro INSEE");?>
-                <?php printInput("text", "patient_firstName", "Prénom du patient");?>
-                <?php printInput("text", "patient_lastName", "Nom du patient");?>
-                <?php printInput("date", "patient_dateOfBirth", "Date de naissance"); ?>
-                <?php printRadioButton("patient_sex", "Sexe", array("F"=>"Femme","M"=>"Homme","O"=>"Autre")); ?>
-                <?php printInput("number", "patient_size", "Taille"); ?>
-                <?php printInput("number", "patient_weight", "Poids"); ?>
-                <?php printCountryDropDownList("patient_countryOfResidence","Pays de résidence"); ?>
+                <?php printInput("number", "patient_insee", "Numéro INSEE", true);?>
+                <?php printInput("text", "patient_firstName", "Prénom du patient", true);?>
+                <?php printInput("text", "patient_lastName", "Nom du patient", true);?>
+                <?php printInput("date", "patient_dateOfBirth", "Date de naissance", true); ?>
+                <?php printRadioButton("patient_sex", "Sexe", array("F"=>"Femme","M"=>"Homme","O"=>"Autre"), true); ?>
+                <?php printInput("number", "patient_size", "Taille", true); ?>
+                <?php printInput("number", "patient_weight", "Poids", true); ?>
+                <?php printCountryDropDownList("patient_countryOfResidence","Pays de résidence", true); ?>
                 <?php printNextButton() ?>
             </form>
         </div>

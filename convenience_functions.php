@@ -82,18 +82,21 @@ function disable()
  * @param $type the type of the <input> (text, number, mail...)
  * @param $id the ID of the <input> (must be unique in the page)
  * @param $label the label associated with the field (will also be used as placeholder)
+ * @param $required a boolean set to True if the field is required
  */
-function printInput($type,$id,$label)
+function printInput($type,$id,$label,$required)
 {
     $label = htmlentities($label);
 
     echo '<label for="'.$id.'">'.$label.' :</label>'."\n";
 
-    echo '                    <input type="'.$type.'" id="'.$id.'" name="'.$id.'" placeholder="'.strtolower($label).'" ';
+    echo '                    <input type="'.$type.'" id="'.$id.'" name="'.$id.'" placeholder="'.(($type == 'date')? 'YYYY-MM-DD' : strtolower($label)).'" ';
     if(isset($_SESSION[$id]))
         echo 'value="'.$_SESSION[$id].'" ';
     disable();
-    echo '/>'."\n";
+    if($required)
+        echo 'required';
+    echo ' />'."\n";
 
     echo '                <br />'."\n";
 }
@@ -103,8 +106,9 @@ function printInput($type,$id,$label)
  * @param $id the ID of the radio button serie (must be unique in the page)
  * @param $label the label associated with the buttons
  * @param $buttons an associative array (button value => button name) of the buttons value and label
+ * @param $required a boolean set to True if the field is required
  */
-function printRadioButton($id,$label,$buttons)
+function printRadioButton($id,$label,$buttons,$required)
 {
     $label = htmlentities($label);
 
@@ -117,6 +121,8 @@ function printRadioButton($id,$label,$buttons)
         if(isset($_SESSION[$id]) && $_SESSION[$id] == $value)
             echo "checked ";
         disable();
+        if($required)
+            echo 'required';
         echo ' />'."\n";
         echo '<label for="'.$id.'-'.$value.'">'.$buttonLabel.'</label>'."\n";
     }
