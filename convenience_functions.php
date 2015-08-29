@@ -66,6 +66,42 @@ function loadRealisateurs($db){return loadList($db,"Prescripteur");}
 function loadBodyparts($db){return loadList($db,"Bodypart");}
 function loadPosture($db){return loadList($db,"Posture");}
 function loadAnatomicOrientation($db){return loadList($db,"AnatomicOrientation");}
+function loadSite($db){return loadList($db, "Site");}
+
+/**
+ * @brief writes a single value to a table on the database
+ * @param $db the database handler
+ * @param $tableName the name of the table to insert into (warning : possible SQL injection if not careful)
+ * @param $columnName the name of the column of the data (warning : possible SQL injection if not careful)
+ * @param $value the value to insert (SQL-injection-proof)
+ */
+function writeToDb($db, $tableName, $columnName, $value)
+{
+    $sql = $db->prepare('INSERT INTO '.$tableName.'('.$columnName.') VALUES (:value) ON DUPLICATE KEY UPDATE '.$columnName.'=:value');
+    $sql->execute(array('value'=>$value));
+    $sql->closeCursor();
+}
+
+function writeOperateur($db, $value){writeToDb($db, "Operateur", "operateur_name", $value);}
+function writePrescripteur($db, $value){writeToDb($db, "Prescripteur", "prescripteur_referringPhysicianName", $value);}
+function writeRealisateur($db, $value){writeToDb($db, "Realisateur", "realisateur_performingPhysicianName", $value);}
+function writePosture($db, $value){writeToDb($db, "Posture", "posture_name", $value);}
+function writeAnatomicOrientation($db, $value){writeToDb($db, "AnatomicOrientation", "anatomicOrientation_name", $value);}
+
+function writeBodypart($db, $anatomicRegionSequence, $bodyPartName)
+{
+    $sql = $db->prepare('INSERT INTO Bodypart(bodyPart_anatomicRegionSequence, bodyPart_Examined)
+    VALUES (:regionSequence, :bodyPart)');
+    $sql->execute(array('regionSequence'=>$anatomicRegionSequence, 'bodyPart'=>$bodyPartName));
+    $sql->closeCursor();
+}
+
+function writeSite($db, $name, $adress)
+{
+    $sql = $db->prepare('INSERT INTO Site(InstitutionName, InstitutionAdress) VALUES(:name, :adress)');
+    $sql->execute(array('name'=>$name, 'adress'=>$adress));
+    $sql->closeCursor();
+}
 
 /**
  * @brief write the content of the $_POST variable to the $_SESSION var
@@ -162,6 +198,28 @@ function printDropDownMenu($id,$label,$contents)
 }
 
 /**
+ * @brief prints a combobox associated with a label and a submit button to add new values in the combobox
+ * @param $id the ID of the combobox (must be unique in the page)
+ * @param $label the label associated with the combobox (and will be used as placeholder)
+ * @param $contents the list of the content for the combobox
+ */
+function printAddableCombobox($id,$label,$contents)
+{
+    echo '<label for="'.$id.'">'.htmlentities($label).' :</label>'."\n";
+    echo '<input type="text" id="'.$id.'" name="'.$id.'" list="liste-'.$id.'" placeholder="'.strtolower($label).'"/>'."\n";
+    echo '<datalist id="liste-'.$id.'">'."\n";
+
+    foreach($contents as $value)
+    {
+        echo '<option>'.htmlentities($value).'</option>'."\n";
+    }
+
+    echo '</datalist>'."\n";
+    echo '<input type="submit" name="add-'.$id.'" value="Ajouter" />'."\n";
+    echo '<br />'."\n";
+}
+
+/**
  * @brief prints a "next" submit button
  */
 function printNextButton(){printSubmitButton("next","suivant");}
@@ -170,6 +228,11 @@ function printNextButton(){printSubmitButton("next","suivant");}
  * @brief prints a "previous" submit button
  */
 function printPreviousButton(){printSubmitButton("previous","précédent");}
+
+/**
+ * @brief prints a default submit button
+ */
+function printDefaultSubmitButton(){printSubmitButton("submit","envoyer");}
 
 /**
  * @brief prints a submit button
