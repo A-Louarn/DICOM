@@ -21,13 +21,13 @@
         <div id="reglagesGeneraux" class="reglagebox leftcolumn toprow">
             <form action="process_admin.php?page=1" method="post">
                 <?php printAddableCombobox('nom-site', "Nom du site", array()); ?>
-                <?php printAddableCombobox('adresse-site', "Adresse du site", array()); ?>
+                <?php printDoubleAddableCombobox('site', "Site", "Nom", "Adresse", array()); ?>
                 <?php printAddableCombobox('operateur', "Opérateur", loadOperateurs($db)); ?>
                 <?php printAddableCombobox('prescripteur', "Prescripteur", loadPrescripteurs($db)); ?>
                 <?php printAddableCombobox('realisateur', "Réalisateur", loadRealisateurs($db)); ?>
                 <?php printAddableCombobox('position-examen', "Position de l'examen", loadPosture($db)); ?>
                 <?php printAddableCombobox('activite-examen', "Activité demandée", loadAnatomicOrientation($db)); ?>
-                <?php printAddableCombobox('localisation-examen',"Localisation de l'examen", loadBodyparts($db)); ?>
+                <?php printDoubleAddableCombobox('localisation-examen',"Localisation de l'examen", "region sequence", "nom", loadBodyparts($db)); ?>
             </form>
         </div>
         <div id="reglagesDicom" class="reglagebox rightcolumn toprow">

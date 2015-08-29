@@ -219,6 +219,33 @@ function printAddableCombobox($id,$label,$contents)
     echo '<br />'."\n";
 }
 
+function printDoubleAddableCombobox($id, $label, $placeholder1, $placeholder2, $contents)
+{
+    echo '<label for="'.$id.'-1">'.htmlentities($label).' :</label>'."\n";
+
+    //drop-down list of actual values
+    if(count($contents) > 0)
+    {
+        echo '<select>'."\n";
+        foreach($contents as $value1=>$value2)
+            echo '<option>'.htmlentities($value1).' -- '.htmlentities($value2).'</option>'."\n";
+        echo '</select>'."\n";
+        echo '<br />'."\n";
+    }
+
+    //text 1
+    echo '<input type="text" id="'.$id.'-1" name="'.$id.'-1" placeholder="'.htmlentities($placeholder1).'"';
+    disable();
+    echo ' />';
+    //text 2
+    echo '<input type="text" id="'.$id.'-2" name="'.$id.'-2" placeholder="'.htmlentities($placeholder2).'"';
+    disable();
+    echo ' />';
+    //submit
+    echo '<input type="submit" name="add-'.$id.'" value="Ajouter" />'."\n";
+    echo '<br />'."\n";
+}
+
 /**
  * @brief prints a "next" submit button
  */
