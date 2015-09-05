@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once('convenience_functions.php');
 
 if(!isset($_GET['page']) || !is_numeric($_GET['page']))
 {
@@ -9,9 +10,10 @@ if(!isset($_GET['page']) || !is_numeric($_GET['page']))
 
 if($_GET['page'] == 1)
 {
+    $db = openDB();
     if(isset($_POST['add-nom-site']))
     {
-        //TODO
+        writeSite($db, $_POST['nom-site'], $_POST['adresse']);
     }
     else if(isset($_POST['add-adresse-site']))
     {
@@ -19,28 +21,29 @@ if($_GET['page'] == 1)
     }
     else if(isset($_POST['add-operateur']))
     {
-        //TODO
+        writeOperateur($db, $_POST['operateur']);
     }
     else if(isset($_POST['add-prescripteur']))
     {
-        //TODO
+        writePrescripteur($db, $_POST['prescripteur']);
     }
     else if(isset($_POST['add-realisateur']))
     {
-        //TODO
+        writeRealisateur($db, $_POST['realisateur']);
     }
     else if(isset($_POST['add-position-examen']))
     {
-        //TODO
+        writePosture($db, $_POST['position-examen']);
     }
     else if(isset($_POST['add-activite-examen']))
     {
-        //TODO
+        writeAnatomicOrientation($db, $_POST['activite-examen']);
     }
     else if(isset($_POST['add-localisation-examen']))
     {
-        //TODO
+        writeBodypart($db, $_POST['localisation-examen'], $_POST['localisation-examen']);
     }
+    header('Location:admin.php');
 }
 else if($_GET['page'] == 2)
 {
