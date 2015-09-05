@@ -11,13 +11,9 @@ if(!isset($_GET['page']) || !is_numeric($_GET['page']))
 if($_GET['page'] == 1)
 {
     $db = openDB();
-    if(isset($_POST['add-nom-site']))
+    if(isset($_POST['add-site']))
     {
-        writeSite($db, $_POST['nom-site'], $_POST['adresse']);
-    }
-    else if(isset($_POST['add-adresse-site']))
-    {
-        //TODO
+        writeSite($db, $_POST['site-1'], $_POST['site-2']);
     }
     else if(isset($_POST['add-operateur']))
     {
@@ -41,7 +37,7 @@ if($_GET['page'] == 1)
     }
     else if(isset($_POST['add-localisation-examen']))
     {
-        writeBodypart($db, $_POST['localisation-examen'], $_POST['localisation-examen']);
+        writeBodypart($db, $_POST['localisation-examen-1'], $_POST['localisation-examen-2']);
     }
     header('Location:admin.php');
 }

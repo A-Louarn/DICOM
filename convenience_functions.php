@@ -236,11 +236,11 @@ function printDoubleAddableCombobox($id, $label, $placeholder1, $placeholder2, $
     //text 1
     echo '<input type="text" id="'.$id.'-1" name="'.$id.'-1" placeholder="'.htmlentities($placeholder1).'"';
     disable();
-    echo ' />';
+    echo ' />'."\n";
     //text 2
     echo '<input type="text" id="'.$id.'-2" name="'.$id.'-2" placeholder="'.htmlentities($placeholder2).'"';
     disable();
-    echo ' />';
+    echo ' />'."\n";
     //submit
     echo '<input type="submit" name="add-'.$id.'" value="Ajouter" />'."\n";
     echo '<br />'."\n";

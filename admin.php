@@ -20,8 +20,7 @@
     <body>
         <div id="reglagesGeneraux" class="reglagebox leftcolumn toprow">
             <form action="process_admin.php?page=1" method="post">
-                <?php printAddableCombobox('nom-site', "Nom du site", array()); ?>
-                <?php printDoubleAddableCombobox('site', "Site", "Nom", "Adresse", array()); ?>
+                <?php printDoubleAddableCombobox('site', "Site", "Nom", "Adresse", loadSite($db)); ?>
                 <?php printAddableCombobox('operateur', "Opérateur", loadOperateurs($db)); ?>
                 <?php printAddableCombobox('prescripteur', "Prescripteur", loadPrescripteurs($db)); ?>
                 <?php printAddableCombobox('realisateur', "Réalisateur", loadRealisateurs($db)); ?>
