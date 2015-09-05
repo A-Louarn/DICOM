@@ -104,8 +104,9 @@ CREATE TABLE IF NOT EXISTS `Examen` (
 -- -----------------------------------------------------
 -- Table `DICOM`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DICOM` (
-    `dicom_IP` VARCHAR(255) PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS `Dicom` (
+    `dicom_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `dicom_IP` VARCHAR(255) NOT NULL,
     `dicom_port` VARCHAR(255) NOT NULL,
     `dicom_transfertSyntaxeUID` VARCHAR(255) NOT NULL
 );
@@ -137,9 +138,7 @@ CREATE TABLE IF NOT EXISTS `Console` (
     `console_DeviceSerialNumber` VARCHAR(255) NOT NULL,
     `console_PerformedStationAETitle` VARCHAR(255) NOT NULL,
     `console_PerformedStationName` VARCHAR(255) NOT NULL,
-    `console_col` VARCHAR(45) NULL,
-    `dicom_IP` VARCHAR(255) NOT NULL,
-    FOREIGN KEY(dicom_IP) REFERENCES Dicom(dicom_IP)
+    `console_col` VARCHAR(45) NULL
 );
 
 

@@ -1,3 +1,6 @@
+-- Site
+INSERT INTO Site VALUES('Hôpital Sud','Rennes');
+
 -- Operateur
 INSERT INTO Operateur VALUES('Dr. Zoidberg');
 INSERT INTO Operateur VALUES('Dr. Frankenstein');
