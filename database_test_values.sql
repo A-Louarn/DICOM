@@ -33,3 +33,8 @@ INSERT INTO AnatomicOrientation VALUES("Allongé");
 -- Patient
 INSERT INTO Patient (patient_insee, patient_firstName, patient_lastName, patient_dateOfBirth, patient_sex, patient_size, patient_weight, patient_typeOfID, patient_adress, patient_insurancePlanIdentification, patient_countryOfResidence, patient_telephoneNumber, patient_additionalHistory) VALUES ('0', 'Bruce', 'Wayne', '2015-01-13', 'M', '180', '90', 'INSEE', 'Manor Wayne, Gotham City', 'INSEE', 'US', NULL, NULL);
 INSERT INTO Patient (patient_insee, patient_firstName, patient_lastName, patient_dateOfBirth, patient_sex, patient_size, patient_weight, patient_typeOfID, patient_adress, patient_insurancePlanIdentification, patient_countryOfResidence, patient_telephoneNumber, patient_additionalHistory) VALUES ('1', 'Tony', 'Stark', '1975-07-28', 'M', '190', '85', 'INSEE', '10880 Malibu Point, 90265', 'INSEE', 'US', NULL, NULL);
+
+-- Dicom
+INSERT INTO Dicom (dicom_IP, dicom_port, dicom_transfertSyntaxeUID) VALUES ('127.0.0.1', '1337', 'Implicit little endian');
+INSERT INTO Dicom (dicom_IP, dicom_port, dicom_transfertSyntaxeUID) VALUES ('8.8.8.8', '8888', 'Implicit little endian');
+INSERT INTO Dicom (dicom_IP, dicom_port, dicom_transfertSyntaxeUID) VALUES ('192.168.1.14', '6874', 'Implicit little endian');
