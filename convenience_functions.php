@@ -115,11 +115,31 @@ function writeToDb($db, $tableName, $columnName, $value)
     $sql->closeCursor();
 }
 
-function writeOperateur($db, $value){writeToDb($db, "Operateur", "operateur_name", $value);}
-function writePrescripteur($db, $value){writeToDb($db, "Prescripteur", "prescripteur_referringPhysicianName", $value);}
-function writeRealisateur($db, $value){writeToDb($db, "Realisateur", "realisateur_performingPhysicianName", $value);}
-function writePosture($db, $value){writeToDb($db, "Posture", "posture_name", $value);}
-function writeAnatomicOrientation($db, $value){writeToDb($db, "AnatomicOrientation", "anatomicOrientation_name", $value);}
+function writeOperateur($db, $value)
+{
+    writeToDb($db, "Operateur", "operateur_name", $value);
+    writeOperateurLogs($db,$value);
+}
+function writePrescripteur($db, $value)
+{
+    writeToDb($db, "Prescripteur", "prescripteur_referringPhysicianName", $value);
+    writePrescripteurLogs($db, $value);
+}
+function writeRealisateur($db, $value)
+{
+    writeToDb($db, "Realisateur", "realisateur_performingPhysicianName", $value);
+    writeRealisateurLogs($db, $value);
+}
+function writePosture($db, $value)
+{
+    writeToDb($db, "Posture", "posture_name", $value);
+    writePostureLogs($db, $value);
+}
+function writeAnatomicOrientation($db, $value)
+{
+    writeToDb($db, "AnatomicOrientation", "anatomicOrientation_name", $value);
+    writeAnatomicOrientationLogs($db, $value);
+}
 
 function writeBodypart($db, $anatomicRegionSequence, $bodyPartName)
 {
@@ -127,6 +147,8 @@ function writeBodypart($db, $anatomicRegionSequence, $bodyPartName)
     VALUES (:regionSequence, :bodyPart)');
     $sql->execute(array('regionSequence'=>$anatomicRegionSequence, 'bodyPart'=>$bodyPartName));
     $sql->closeCursor();
+
+    writeBodypartLogs($db, $anatomicRegionSequence, $bodyPartName);
 }
 
 function writeSite($db, $name, $adress)
@@ -134,6 +156,8 @@ function writeSite($db, $name, $adress)
     $sql = $db->prepare('INSERT INTO Site(InstitutionName, InstitutionAdress) VALUES(:name, :adress)');
     $sql->execute(array('name'=>$name, 'adress'=>$adress));
     $sql->closeCursor();
+
+    writeSiteLogs($db, $name, $adress);
 }
 
 function writeDicom($db, $ip, $port, $syntax)
@@ -145,6 +169,8 @@ function writeDicom($db, $ip, $port, $syntax)
         'syntax' => $syntax
     ));
     $sql->closeCursor();
+
+    writeDicomLogs($db, $ip, $port, $syntax);
 }
 
 /**
@@ -586,5 +612,68 @@ function printCountryDropDownList($id,$label)
     }
     echo '</select>'."\n";
     echo '<br />'."\n";
+}
+
+/*----logs----*/
+
+function loadLastLogs($db)
+{
+    //selects the log entries from the last 7 days, with a limit of 256 entries
+    $sql = $db->query('SELECT logs_timestamp, logs_message FROM Logs WHERE logs_timestamp > NOW() - INTERVAL 7 DAY ORDER BY logs_timestamp ASC LIMIT 0,256');
+
+    while($data = $sql->fetch())
+        echo $data['logs_timestamp']." : ".$data['logs_message']."\n";
+}
+
+/**
+ * @brief writes a message to the application logs
+ * @param $db the database to use
+ * @param $msg the message to write
+ */
+function writeToLogs($db, $msg)
+{
+    $sql = $db->prepare('INSERT INTO Logs(logs_timestamp, logs_message) VALUES (NOW(), ?)');
+    $sql->execute(array($msg));
+    $sql->closeCursor();
+}
+
+function writeOperateurLogs($db, $value)
+{
+    writeToLogs($db, "Ajout de l'opérateur ".$value);
+}
+
+function writePrescripteurLogs($db, $value)
+{
+    writeToLogs($db, "Ajout du prescripteur ".$value);
+}
+
+function writeRealisateurLogs($db, $value)
+{
+    writeToLogs($db, "Ajout du réalisateur ".$value);
+}
+
+function writePostureLogs($db, $value)
+{
+    writeToLogs($db, "Ajout de la posture ".$value);
+}
+
+function writeAnatomicOrientationLogs($db, $value)
+{
+    writeToLogs($db, "Ajout de l'activité ".$value);
+}
+
+function writeBodypartLogs($db, $anatomicRegionSequence, $bodyPartName)
+{
+    writeToLogs($db, "Ajout de la localisation " . $bodyPartName . " (sequence ".$anatomicRegionSequence.")");
+}
+
+function writeSiteLogs($db, $name, $adress)
+{
+    writeToLogs($db, "Ajout du site " . $name . " (" . $adress . ")");
+}
+
+function writeDicomLogs($db, $ip, $port, $syntax)
+{
+    writeToLogs($db, "Modification du port dicom : " . $ip . ":" . $port . "(" . $syntax . ")");
 }
 ?>

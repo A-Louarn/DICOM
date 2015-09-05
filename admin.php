@@ -51,7 +51,7 @@
             </form>
         </div>
         <div id="Logs" class="reglagebox leftcolumn bottomrow">
-            <textarea rows="4" cols="50">Ceci est un test pour les logs.</textarea>
+            <textarea readonly><?php loadLastLogs($db); ?></textarea>
             <br />
         </div>
         <div id="sauvegarder" class="reglagebox rightcolumn bottomrow">

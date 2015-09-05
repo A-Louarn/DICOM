@@ -234,3 +234,12 @@ CREATE TABLE IF NOT EXISTS `Signal` (
     `signal_measurementUnit` TEXT NOT NULL,
     `signal_waveformSequence` VARCHAR(255) NOT NULL
 );
+
+-- -----------------------------------------------------
+-- Table `Logs`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Logs` (
+    `logs_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `logs_timestamp` DATETIME NOT NULL,
+    `logs_message` TEXT NOT NULL
+);
