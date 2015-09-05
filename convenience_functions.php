@@ -68,6 +68,39 @@ function loadPosture($db){return loadList($db,"Posture");}
 function loadAnatomicOrientation($db){return loadList($db,"AnatomicOrientation");}
 function loadSite($db){return loadList($db, "Site");}
 
+function loadDicom($db)
+{
+    $sql = $db->query('SELECT dicom_IP, dicom_port, dicom_transfertSyntaxeUID FROM Dicom ORDER BY dicom_id DESC');
+
+    $list = array();
+
+    while($data = $sql->fetch())
+    {
+        $value = $data['dicom_IP'] . ', ' . $data['dicom_port'] . ', ' . $data['dicom_transfertSyntaxeUID'];
+        $list[$value] = $value;
+    }
+
+    $sql->closeCursor();
+
+    return $list;
+}
+
+function loadCurrentDicomValue($db)
+{
+    $sql = $db->query('SELECT dicom_IP, dicom_port, dicom_transfertSyntaxeUID FROM Dicom ORDER BY dicom_id DESC LIMIT 0, 1');
+
+    $data = $sql->fetch();
+
+    if(!isset($_SESSION['adresse-ip']) || !isset($_SESSION['port-dicom']) || !isset($_SESSION['syntaxe-transfert']))
+    {
+        $_SESSION['adresse-ip'] = $data['dicom_IP'];
+        $_SESSION['port-dicom'] = $data['dicom_port'];
+        $_SESSION['syntaxe-transfert'] = $data['dicom_transfertSyntaxeUID'];
+    }
+
+    $sql->closeCursor();
+}
+
 /**
  * @brief writes a single value to a table on the database
  * @param $db the database handler
@@ -100,6 +133,17 @@ function writeSite($db, $name, $adress)
 {
     $sql = $db->prepare('INSERT INTO Site(InstitutionName, InstitutionAdress) VALUES(:name, :adress)');
     $sql->execute(array('name'=>$name, 'adress'=>$adress));
+    $sql->closeCursor();
+}
+
+function writeDicom($db, $ip, $port, $syntax)
+{
+    $sql = $db->prepare('INSERT INTO Dicom (dicom_IP, dicom_port, dicom_transfertSyntaxeUID) VALUES (:ip, :port, :syntax)');
+    $sql->execute(array(
+        'ip' => $ip,
+        'port' => $port,
+        'syntax' => $syntax
+    ));
     $sql->closeCursor();
 }
 

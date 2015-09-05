@@ -29,11 +29,24 @@
                 <?php printDoubleAddableCombobox('localisation-examen',"Localisation de l'examen", "region sequence", "nom", loadBodyparts($db)); ?>
             </form>
         </div>
+<!--
+<?php print_r(loadDicom($db)); ?>
+-->
         <div id="reglagesDicom" class="reglagebox rightcolumn toprow">
             <form action="process_admin.php?page=2" method="post">
+                <?php printDropDownMenu('histo-dicom', 'Historique du Dicom', loadDicom($db)); ?>
+                <?php printSubmitButton('load-histo', 'Charger'); ?>
+                <br />
+            </form>
+            <form action="process_admin.php?page=2" method="post">
+                <?php loadCurrentDicomValue($db); ?>
                 <?php printInput('text','adresse-ip','Adresse IP',true); ?>
                 <?php printInput('number','port-dicom','Port DICOM',true); ?>
-                <?php printDropDownMenu('syntaxe-transfert','Syntaxe de transfert',array('Implicit little endian', 'Explicit little endian', 'Implicit big endian', 'Explicit big endian')) ?>
+                <?php printDropDownMenu('syntaxe-transfert','Syntaxe de transfert', array(
+                        'Implicit little endian' => 'Implicit little endian',
+                        'Explicit little endian' => 'Explicit little endian',
+                        'Implicit big endian' => 'Implicit big endian',
+                        'Explicit big endian' => 'Explicit big endian')) ?>
                 <?php printDefaultSubmitButton(); ?>
             </form>
         </div>
