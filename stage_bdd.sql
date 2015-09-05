@@ -75,15 +75,15 @@ CREATE TABLE IF NOT EXISTS `AnatomicOrientation` (
 -- Table `Examen`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Examen` (
-    `examen_accessionNumber` INTEGER PRIMARY KEY AUTO_INCREMENT, -- //TODO: auto-increment
-    `examen_instanceCreationDateTime` DATETIME NOT NULL, -- //TODO: auto
-    `examen_procedureCodeSequence` VARCHAR(255) NOT NULL, -- //TODO: no-form
+    `examen_accessionNumber` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `examen_instanceCreationDateTime` DATETIME NOT NULL,
+    `examen_procedureCodeSequence` VARCHAR(255) NOT NULL,
     `examen_institutionalDepartementName` VARCHAR(255) NULL, -- //TODO: service (link to other table)
-    `examen_protocolName` VARCHAR(255) NOT NULL, -- //TODO: const = ?
-    `examen_performedProcedureStepID` VARCHAR(255) NOT NULL, -- //TODO: const = default
-    `examen_performedProcedureStepDescription` VARCHAR(255) NULL, -- //TODO: no-form
-    `examen_contentDateTime` DATETIME NOT NULL, -- //TODO: auto (== instanceCreationDateTime)
-    `examen_instanceCreatorUID` VARCHAR(255) NOT NULL, -- //TODO: const = default
+    `examen_protocolName` VARCHAR(255) NOT NULL,
+    `examen_performedProcedureStepID` VARCHAR(255) NOT NULL,
+    `examen_performedProcedureStepDescription` VARCHAR(255) NULL,
+    `examen_contentDateTime` DATETIME NOT NULL,
+    `examen_instanceCreatorUID` VARCHAR(255) NOT NULL,
     `bodyPart_anatomicRegionSequence` VARCHAR(255) NOT NULL,
     `anatomicOrientation_name` VARCHAR(255) NOT NULL,
     `posture_name` VARCHAR(255) NOT NULL,
